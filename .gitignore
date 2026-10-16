@@ -1,0 +1,7 @@
+dist/
+upload/
+node_modules/
+*.zip
+.env
+.env.*
+.hostinger/
