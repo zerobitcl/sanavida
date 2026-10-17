@@ -63,5 +63,5 @@ export default landing({
     { q: '¿Puedo tomarlo todos los días si soy intolerante leve?', a: 'Muchas personas lo hacen sin problema tras la adaptación. Si aparecen molestias, baja la dosis o pausa y consulta.' },
   ],
   ctaTitle: 'Pruébalo a tu ritmo',
-  ctaText: `Kéfir artesanal fresco, coordinado en la ${site.regionShort}.`,
+  ctaText: `kéfir natural fresco, coordinado en la ${site.regionShort}.`,
 });

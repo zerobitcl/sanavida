@@ -8,7 +8,7 @@ export default landing({
   tag: 'Salud digestiva',
   health: true,
   title: 'Kéfir para gases, inflamación y colon irritable | SanaVida',
-  description: 'Beneficios del kéfir para la digestión, los gases, la hinchazón y el colon irritable: cómo tomarlo y precauciones. Kéfir artesanal en la IV Región.',
+  description: 'Beneficios del kéfir para la digestión, los gases, la hinchazón y el colon irritable: cómo tomarlo y precauciones. kéfir natural en la IV Región.',
   eyebrow: 'Salud digestiva',
   h1: 'Kéfir para gases, inflamación y <em>colon irritable</em>: lo que sí puede hacer por ti',
   lead: 'Hinchazón, gases, pesadez, estreñimiento. Consumir kéfir regularmente puede ayudar a desinflamar el abdomen, mejorar la digestión y que tu cuerpo absorba mejor los nutrientes — protegiéndote del malestar de estómago.',
@@ -59,7 +59,7 @@ export default landing({
       id: 'por-que-vivo',
       title: 'Por qué importa que el kéfir esté vivo',
       html: `<p>Para obtener estos resultados necesitas un <strong>kéfir real</strong>. Las opciones del supermercado suelen pasar por procesos térmicos o industriales para durar meses en góndola: eso destruye buena parte de las bacterias buenas y el efecto reparador.</p>
-<p>El kéfir SanaVida es <strong>100% natural y artesanal</strong>: no se pasteuriza, no lleva conservantes y se entrega fresco en la IV Región. Compara en <a href="/kefir-vs-yogurt/">kéfir vs yogur industrial</a>.</p>`,
+<p>El kéfir SanaVida es <strong>100% natural</strong>: no se pasteuriza, no lleva conservantes y se entrega fresco en la IV Región. Compara en <a href="/kefir-vs-yogurt/">kéfir vs yogur industrial</a>.</p>`,
     },
     {
       id: 'precauciones',
@@ -77,6 +77,6 @@ export default landing({
     { q: '¿El kéfir puede dar gases al principio?', a: 'Sí, es habitual durante los primeros días mientras tu intestino se adapta. Por eso conviene partir con porciones pequeñas.' },
     { q: '¿Lo puedo tomar si soy intolerante a la lactosa?', a: 'Muchas personas con intolerancia leve lo toleran bien, porque la fermentación reduce buena parte de la lactosa. Si tu intolerancia es severa, pruébalo en cantidades muy pequeñas y consulta a tu médico.' },
   ],
-  ctaTitle: 'Prueba una opción 100% natural y artesanal',
+  ctaTitle: 'Prueba una opción 100% natural',
   ctaText: 'Haz tu pedido hoy con envío a domicilio. Kéfir real, sin pasar por la góndola.',
 });

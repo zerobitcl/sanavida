@@ -8,7 +8,7 @@ export default landing({
   nav: `Pedido kéfir ${site.regionShort}`,
   tag: 'Entregas',
   title: `Pedir kéfir en la ${site.regionShort}: Ovalle, La Serena y Coquimbo`,
-  description: `Cómo pedir kéfir artesanal en la ${site.region}. Puntos gratis en Ovalle y entregas consolidadas a La Serena, Coquimbo y más comunas. WhatsApp.`,
+  description: `Cómo pedir kéfir natural en la ${site.region}. Puntos gratis en Ovalle y entregas consolidadas a La Serena, Coquimbo y más comunas. WhatsApp.`,
   eyebrow: `Cobertura ${site.regionShort}`,
   h1: `Cómo pedir kéfir en la ${site.regionShort}: <em>Ovalle</em> y el resto de la región`,
   lead: `Elaboramos en ${site.city} y repartimos en toda la ${site.region}. En Ovalle hay puntos fijos semanales. En La Serena, Coquimbo y otras comunas juntamos pedidos y armamos la ruta.`,
@@ -51,7 +51,7 @@ export default landing({
       id: 'que-recibes',
       title: 'Qué recibes',
       html: `<ul>
-<li>Kéfir de leche <strong>artesanal</strong>, sin pasteurizar después de fermentar.</li>
+<li>Kéfir de leche <strong>natural</strong>, sin pasteurizar después de fermentar.</li>
 <li>Sin azúcar añadida ni conservantes.</li>
 <li>Entrega fresca, pensada para consumir en la semana.</li>
 </ul>

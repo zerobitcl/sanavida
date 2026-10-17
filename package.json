@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "Sitio estático SEO de SanaVida, kéfir artesanal en Ovalle",
+  "description": "Sitio estático SEO de SanaVida, kéfir natural en Ovalle",
   "scripts": {
     "build": "node build.mjs",
     "check": "node build.mjs && node check.mjs",

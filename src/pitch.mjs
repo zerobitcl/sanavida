@@ -22,7 +22,7 @@ export const symptomsBlock = () => `
     <div class="pitch-symptoms-head">
       <p class="eyebrow">Parte uno: el kéfir</p>
       <h2 id="sintomas-title" class="h2">¿Estreñimiento? ¿Inflamación? ¿Mal humor? <em>Toma kéfir.</em></h2>
-      <p class="lead">Alimentos para sanar tu sistema digestivo. El kéfir artesanal ayuda a limpiar el intestino, combatir los gases y devolverle el equilibrio — sin depender de laxantes o pastillas.</p>
+      <p class="lead">Alimentos para sanar tu sistema digestivo. El kéfir natural ayuda a limpiar el intestino, combatir los gases y devolverle el equilibrio — sin depender de laxantes o pastillas.</p>
     </div>
     <ul class="pitch-symptom-grid">
       ${pitchSymptoms.map((s) => `<li><strong>${s.t}</strong><span>${s.d}</span></li>`).join('')}
@@ -53,7 +53,7 @@ export const gutBrainBlock = () => `
   </div>
 </section>`;
 
-/** Hook repetido en los 4 videos: súper vs artesanal */
+/** Hook repetido en los 4 videos: súper vs natural */
 export const realVsSuperBlock = () => `
 <section class="section pitch-vs" aria-labelledby="real-title">
   <div class="wrap">
@@ -71,7 +71,7 @@ export const realVsSuperBlock = () => `
         </ul>
       </article>
       <article class="pitch-vs-card pitch-vs-good">
-        <h3>SanaVida artesanal</h3>
+        <h3>SanaVida natural</h3>
         <ul>
           <li>100% natural, sin pasteurizar</li>
           <li>Búlgaros vivos, fermentación real</li>
@@ -81,7 +81,7 @@ export const realVsSuperBlock = () => `
       </article>
     </div>
     <div class="center hero-actions" style="justify-content:center;margin-top:2rem">
-      ${btnWa('Pedir kéfir artesanal con envío', 'Hola SanaVida, quiero pedir kéfir artesanal 100% natural con envío a domicilio')}
+      ${btnWa('Pedir kéfir natural con envío', 'Hola SanaVida, quiero pedir kéfir natural 100% natural con envío a domicilio')}
       <a class="btn btn-ghost" href="/pedido/">Formulario de pedido ${icon('arrow')}</a>
     </div>
   </div>

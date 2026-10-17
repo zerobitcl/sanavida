@@ -104,7 +104,7 @@ ${ogAbs ? `<meta property="og:url" content="${canonical}">
 <a class="skip" href="#main">Saltar al contenido</a>
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="/" aria-label="SanaVida, inicio">${brandLogo(56)}<small>Kéfir artesanal<br>${site.regionShort}</small></a>
+    <a class="brand" href="/" aria-label="SanaVida, inicio">${brandLogo(56)}<small>kéfir natural<br>${site.regionShort}</small></a>
     <nav class="nav-desk" aria-label="Principal">${navList}</nav>
     <details class="menu">
       <summary aria-label="Abrir menú"><span></span><span></span><span></span></summary>

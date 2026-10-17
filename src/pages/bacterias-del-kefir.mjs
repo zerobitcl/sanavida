@@ -6,11 +6,11 @@ export default landing({
   nav: 'Qué contiene el kéfir',
   tag: 'Ciencia',
   title: 'Qué contiene el kéfir: bacterias, levaduras y kefirán | SanaVida',
-  description: 'Bacterias ácido-lácticas, levaduras y kefirán: qué hay realmente en un kéfir artesanal, cómo se forma y qué se puede afirmar con evidencia.',
+  description: 'Bacterias ácido-lácticas, levaduras y kefirán: qué hay realmente en un kéfir natural, cómo se forma y qué se puede afirmar con evidencia.',
   eyebrow: 'Ciencia sin exageraciones',
   h1: 'Qué contiene el kéfir: <em>bacterias, levaduras</em> y lo que la ciencia sí dice',
   lead: `${site.claims.short}. Te explicamos qué microorganismos participan, qué hace cada uno y por qué preferimos hablar con precisión antes que con promesas.`,
-  cta: 'Probar kéfir artesanal',
+  cta: 'Probar kéfir natural',
   ctaMsg: 'Hola SanaVida, leí sobre qué contiene el kéfir y quiero probarlo',
   midCta: '¿Te interesa probarlo? Te contamos cómo empezar sin molestias.',
   keyFacts: [
@@ -68,5 +68,5 @@ export default landing({
     { q: '¿Las bacterias del kéfir sobreviven en el refrigerador?', a: 'Sí. El frío las mantiene vivas y ralentiza la fermentación. Lo que las elimina es el calor alto, como hervir o pasteurizar.' },
   ],
   ctaTitle: 'Un alimento vivo, explicado con honestidad',
-  ctaText: `Pide tu kéfir artesanal y coordina la entrega en la ${site.regionShort}.`,
+  ctaText: `Pide tu kéfir natural y coordina la entrega en la ${site.regionShort}.`,
 });

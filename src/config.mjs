@@ -40,8 +40,8 @@ export const site = {
     },
   },
   product: {
-    name: 'Yoghurt de Pajaritos / Kéfir de Elaboración Artesanal SanaVida',
-    shortName: 'Kéfir artesanal SanaVida',
+    name: 'Yoghurt de Pajaritos / Kéfir de Elaboración Natural SanaVida',
+    shortName: 'kéfir natural SanaVida',
     flavor: 'Sabor Natural',
     format: 'botella',
     size: '1 L',
@@ -100,11 +100,11 @@ export const site = {
   },
   logo: { src: '/img/brand/logo-240.png', large: '/img/brand/logo-480.png', w: 1179, h: 786 },
   claims: {
-    short: 'Kéfir artesanal vivo: bacterias buenas para sentirte bien',
+    short: 'kéfir natural vivo: bacterias buenas para sentirte bien',
     science:
       'Contiene 40 millones de UFC/g de bacterias ácido-lácticas y 5,6 millones de UFC/g de levaduras, certificadas por Laboratorio Analab, propias de la fermentación con nódulos de kéfir.',
     slogan: 'Alimenta hoy tu bienestar de mañana',
-    // Guion ads 05-10-26: contraste súper vs artesanal (repetido en los 4 videos).
+    // Guion ads 05-10-26: contraste súper vs natural (repetido en los 4 videos).
     vsSuper:
       'Las opciones del supermercado pasan por procesos industriales para durar meses en góndola y pierden el cultivo vivo. SanaVida es kéfir real: 100% natural, sin pasteurizar, con envío fresco.',
   },
@@ -122,7 +122,7 @@ export const abs = (path) => {
   return site.url ? `${site.url.replace(/\/$/, '')}${p}` : p;
 };
 
-export const waLink = (msg = 'Hola SanaVida, quiero pedir kéfir artesanal en botella de 1L 🥛') =>
+export const waLink = (msg = 'Hola SanaVida, quiero pedir kéfir natural en botella de 1L 🥛') =>
   `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(msg)}`;
 
 export const clp = (n) => `$${n.toLocaleString('es-CL')}`;

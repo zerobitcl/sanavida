@@ -46,7 +46,7 @@ export const btnWa = (label = 'Pedir por WhatsApp', msg, cls = '') =>
 // Ilustración inline en lugar de foto: 0 requests extra y LCP basado en texto.
 // Cuando existan fotos reales del producto, reemplazar por <img> AVIF/WebP con width/height.
 export const jarArt = () => `
-<svg class="jar-art" viewBox="0 0 320 380" role="img" aria-label="Botella de yogurt de kéfir artesanal SanaVida">
+<svg class="jar-art" viewBox="0 0 320 380" role="img" aria-label="Botella de yogurt de kéfir natural SanaVida">
   <defs>
     <linearGradient id="milk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFDF9"/><stop offset="1" stop-color="#F1E8E0"/></linearGradient>
     <linearGradient id="glass" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".55"/><stop offset=".5" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".4"/></linearGradient>
@@ -114,7 +114,7 @@ export const delivery = () => `
 
 export const ctaBand = (
   title = '¿Listo para probar un kéfir real?',
-  text = `100% natural y artesanal. Haz tu pedido hoy con envío a domicilio en la ${site.regionShort}.`,
+  text = `100% natural. Haz tu pedido hoy con envío a domicilio en la ${site.regionShort}.`,
 ) => `
 <section class="cta-band">
   <div class="wrap cta-inner">
@@ -262,7 +262,7 @@ export const processBlock = () => {
 <section class="section process-real" id="proceso" aria-labelledby="proceso-title">
   <div class="wrap ${video ? 'process-grid' : ''}">
     <div>
-      <p class="eyebrow">Trazabilidad artesanal</p>
+      <p class="eyebrow">Proceso natural</p>
       <h2 id="proceso-title" class="h2">Del frasco a tu botella: fermentación real con <em>nódulos de kéfir</em></h2>
       <p class="lead">${esc(site.maker.name)} trabaja con búlgaros vivos, no con cultivos en polvo. Este es el recorrido completo de cada botella.</p>
       <ol class="flow">${processSteps.map(([t, d], i) => `<li><span>0${i + 1}</span><div><strong>${t}</strong><p>${d}</p></div></li>`).join('')}</ol>

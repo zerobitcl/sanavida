@@ -9,7 +9,7 @@ const rows = [
   ['Azúcar', 'Sin azúcar añadida', 'Frecuentemente con azúcar y saborizantes'],
   ['Aditivos', 'Ninguno', 'Espesantes, estabilizantes, colorantes'],
   ['Textura', 'Bebible, levemente efervescente', 'Cremosa y homogénea'],
-  ['Origen', 'Artesanal, hecho en Ovalle', 'Producción masiva'],
+  ['Origen', 'Natural, hecho en Ovalle', 'Producción masiva'],
 ];
 
 export default landing({
@@ -21,7 +21,7 @@ export default landing({
   eyebrow: 'Comparativa honesta',
   h1: 'Kéfir vs yogur industrial: <em>cuál elegir</em> si sufres de gases e inflamación',
   lead: 'Para notar el cambio necesitas un kéfir real. Las opciones del súper suelen perder el cultivo vivo para durar meses en góndola. Aquí comparamos qué importa de verdad para tu digestión.',
-  cta: 'Probar kéfir artesanal',
+  cta: 'Probar kéfir natural',
   keyFacts: [
     'El kéfir tiene mucha más diversidad de microorganismos.',
     'Suele tener menos lactosa y cero azúcar añadida.',
@@ -33,7 +33,7 @@ export default landing({
       id: 'tabla',
       title: 'Comparación rápida',
       html: `<div class="table-wrap"><table>
-<caption>Kéfir artesanal SanaVida frente a un yogur industrial promedio</caption>
+<caption>kéfir natural SanaVida frente a un yogur industrial promedio</caption>
 <thead><tr><th scope="col">Característica</th><th scope="col">Kéfir SanaVida</th><th scope="col">Yogur industrial</th></tr></thead>
 <tbody>${rows.map((r) => `<tr><th scope="row">${r[0]}</th><td>${r[1]}</td><td>${r[2]}</td></tr>`).join('')}</tbody>
 </table></div>
@@ -68,6 +68,6 @@ export default landing({
     { q: '¿Puedo reemplazar el yogur por kéfir en recetas?', a: 'Sí. Funciona en batidos, avena remojada, aderezos y marinadas. Al ser más líquido, en recetas que requieren cuerpo puedes colarlo unas horas para obtener un kéfir más espeso.' },
     { q: '¿El kéfir engorda más que el yogur?', a: 'Un kéfir de leche sin azúcar tiene calorías similares a la leche con que se prepara. Muchos yogures comerciales aportan más calorías por el azúcar añadida.' },
   ],
-  ctaTitle: 'Prueba una opción 100% natural y artesanal',
+  ctaTitle: 'Prueba una opción 100% natural',
   ctaText: 'Haz tu pedido hoy con envío a domicilio. Kéfir real, no de góndola.',
 });

@@ -6,7 +6,7 @@ export default landing({
   nav: 'Recetas con kéfir',
   tag: 'Recetas',
   title: 'Recetas con kéfir: batido de frutillas y arándanos | SanaVida',
-  description: `Recetas fáciles con kéfir artesanal: batido de frutillas y arándanos, bowls, aderezos y versión salada. Guía práctica desde la ${site.regionShort}.`,
+  description: `Recetas fáciles con kéfir natural: batido de frutillas y arándanos, bowls, aderezos y versión salada. Guía práctica desde la ${site.regionShort}.`,
   eyebrow: 'En la cocina',
   h1: 'Recetas con kéfir: <em>fáciles</em>, ricas y sin arruinar el cultivo',
   lead: 'El kéfir natural es ácido. Estas preparaciones lo hacen amable desde el primer día, sin agregar azúcar durante la fermentación.',

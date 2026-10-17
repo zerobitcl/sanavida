@@ -6,7 +6,7 @@ export default landing({
   nav: 'Yogurt de pajaritos',
   tag: 'Local',
   title: `Yogurt de pajaritos en la ${site.regionShort}: qué es y dónde comprar`,
-  description: `El yogurt de pajaritos es kéfir de leche fermentado con búlgaros. Cómpralo artesanal en la ${site.region}: puntos en Ovalle y entregas regionales.`,
+  description: `El yogurt de pajaritos es kéfir de leche fermentado con búlgaros. Cómpralo natural en la ${site.region}: puntos en Ovalle y entregas regionales.`,
   eyebrow: 'El kéfir de siempre, con nombre chileno',
   h1: `Yogurt de pajaritos en la ${site.regionShort}: <em>el de la abuela</em>, hecho a mano`,
   lead: `Si alguna vez te regalaron "pajaritos" en un frasco, ya conoces el kéfir. En SanaVida lo seguimos preparando igual en ${site.city}: con búlgaros vivos, sin pasteurizar y disponible en toda la región.`,
@@ -46,14 +46,14 @@ export default landing({
     {
       id: 'comprar-ovalle',
       title: `Dónde comprar yogurt de pajaritos en la ${site.regionShort}`,
-      html: `<p>En SanaVida preparamos yogurt de pajaritos artesanal en ${site.city} y lo repartimos en toda la ${site.region}.</p>
+      html: `<p>En SanaVida preparamos yogurt de pajaritos natural en ${site.city} y lo repartimos en toda la ${site.region}.</p>
 <p><strong>En ${site.city}</strong>, gratis cada semana en:</p>
 <ul>${site.deliveryPoints.map((p) => `<li>${p.name}</li>`).join('')}</ul>
 <p>Delivery en ${site.city} por <strong>${clp(site.deliveryFee)}</strong>. Si estás en La Serena, Coquimbo u otra comuna, <a href="/pedido-kefir-iv-region/">coordinamos entregas consolidadas</a>.</p>`,
     },
     {
-      id: 'por-que-artesanal',
-      title: 'Por qué artesanal y no del supermercado',
+      id: 'por-que-natural',
+      title: 'Por qué natural y no del supermercado',
       html: `<p>Los productos de kéfir industriales suelen pasar por procesos de estandarización, espesantes o pasteurización posterior para alargar su vida útil. El resultado es práctico, pero el cultivo que llega a tu mesa ya no es el mismo.</p>
 <p>Nuestro yogurt de pajaritos <strong>no se pasteuriza después de fermentar</strong>, no lleva conservantes y se entrega fresco. Es exactamente lo que harías en casa con tus propios pajaritos, pero sin tener que cuidarlos tú.</p>`,
     },

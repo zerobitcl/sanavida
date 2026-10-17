@@ -193,7 +193,7 @@ export function buildQuoteHtml(input) {
     </div>
 
     <p class="intro">
-      Gracias por tu interés en el <strong>kéfir artesanal SanaVida</strong>: cultivo vivo, sin pasteurizar,
+      Gracias por tu interés en el <strong>kéfir natural SanaVida</strong>: cultivo vivo, sin pasteurizar,
       100% natural. Esta cotización resume tu solicitud para que Paola la confirme y coordine entrega en la ${esc(site.regionShort)}.
     </p>
 
@@ -245,7 +245,7 @@ export function buildQuoteHtml(input) {
       <ul>
         <li>Producto refrigerado: mantener entre 4° y 8°C. Consumir preferentemente en 7–10 días.</li>
         <li>Entregas en ${esc(site.city)} (puntos gratis / domicilio) y rutas consolidadas en la ${esc(site.regionShort)}.</li>
-        <li>Cotización referencial · validez 15 días · sujeta a disponibilidad de producción artesanal.</li>
+        <li>Cotización referencial · validez 15 días · sujeta a disponibilidad de elaboración natural.</li>
         <li>Res. Exenta SEREMI N.º ${esc(site.legal.seremi.resolution)} · ${esc(site.legal.seremi.authority)}.</li>
       </ul>
     </div>
@@ -268,7 +268,7 @@ export function buildQuoteHtml(input) {
 export function summarizeQuoteForWa({ id, input, fileUrl }) {
   const nombre = input.empresa || 'hola';
   return [
-    `Hola ${nombre}, te envío la cotización ${id} de SanaVida (kéfir artesanal).`,
+    `Hola ${nombre}, te envío la cotización ${id} de SanaVida (kéfir natural).`,
     input.cantidad ? `• Cantidad: ${input.cantidad}` : '',
     fileUrl ? `• PDF: ${fileUrl}` : '',
     'Cualquier duda, me escribes por aquí 😊',

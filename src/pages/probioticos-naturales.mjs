@@ -9,12 +9,12 @@ export default landing({
   tag: 'Microbiota',
   health: true,
   title: '¿El kéfir es probiótico? Lo que dice la ciencia | SanaVida',
-  description: 'Qué es realmente un probiótico, qué contiene el kéfir artesanal y por qué la precisión importa. Bacterias ácido-lácticas y levaduras viables, explicadas.',
+  description: 'Qué es realmente un probiótico, qué contiene el kéfir natural y por qué la precisión importa. Bacterias ácido-lácticas y levaduras viables, explicadas.',
   eyebrow: 'Alimentación real',
   h1: '¿El kéfir es probiótico? <em>Lo que sí</em> se puede afirmar',
-  lead: 'Muchos productos se venden como "probióticos" sin respaldo. Te explicamos qué significa el término, qué contiene el kéfir artesanal y cómo elegir uno con microorganismos realmente vivos.',
+  lead: 'Muchos productos se venden como "probióticos" sin respaldo. Te explicamos qué significa el término, qué contiene el kéfir natural y cómo elegir uno con microorganismos realmente vivos.',
   cta: 'Probar kéfir vivo',
-  ctaMsg: 'Hola SanaVida, quiero probar el kéfir artesanal',
+  ctaMsg: 'Hola SanaVida, quiero probar el kéfir natural',
   keyFacts: [
     'Probiótico = cepa identificada con beneficio demostrado.',
     'El kéfir contiene bacterias ácido-lácticas y levaduras viables.',
@@ -32,7 +32,7 @@ export default landing({
     },
     {
       id: 'kefir',
-      title: 'Qué contiene el kéfir artesanal',
+      title: 'Qué contiene el kéfir natural',
       html: `<p>${site.claims.science} Esas bacterias y levaduras provienen de los búlgaros y son las que transforman la leche en kéfir.</p>
 <p>Es uno de los fermentados con mayor diversidad microbiana. Te lo explicamos en detalle en <a href="/bacterias-del-kefir/">qué contiene el kéfir</a>.</p>`,
     },
@@ -61,5 +61,5 @@ export default landing({
     { q: '¿Los microorganismos del kéfir mueren con el frío?', a: 'No. El refrigerador los mantiene vivos y frena la fermentación. El calor alto sí los elimina.' },
   ],
   ctaTitle: 'Un fermentado vivo, sin promesas vacías',
-  ctaText: `Pide kéfir artesanal SanaVida y coordina entrega en la ${site.regionShort}.`,
+  ctaText: `Pide kéfir natural SanaVida y coordina entrega en la ${site.regionShort}.`,
 });

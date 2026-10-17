@@ -33,15 +33,15 @@ export const productHero = () => {
   <div class="wrap prod-hero-grid">
     <div class="prod-hero-copy">
       <p class="trust-badge">${checkSvg} Certificado por Lab. ${esc(lab.name)} · Res. Sanitaria SEREMI Coquimbo N.º ${esc(legal.seremi.resolution)}</p>
-      <h1 class="display">Kéfir Artesanal y Yoghurt de Pajaritos Sanavida en ${site.city} – <em>100% Búlgaros Vivos</em> (1 Litro)</h1>
-      <p class="lead">${esc(claims.slogan)}. Fermentado artesanalmente con nódulos de kéfir reales: Sin lactosa, sin azúcar añadida y con <strong>40 millones de UFC/g</strong> de probióticos naturales certificados por ${esc(lab.displayName)}.</p>
+      <h1 class="display">kéfir natural y Yoghurt de Pajaritos Sanavida en ${site.city} – <em>100% Búlgaros Vivos</em> (1 Litro)</h1>
+      <p class="lead">${esc(claims.slogan)}. fermentado de forma natural con nódulos de kéfir reales: Sin lactosa, sin azúcar añadida y con <strong>40 millones de UFC/g</strong> de probióticos naturales certificados por ${esc(lab.displayName)}.</p>
       <ul class="prod-bullets">
         <li>${checkSvg}<span>Solo 2 ingredientes: <strong>Leche entera y búlgaros vivos</strong>.</span></li>
         <li>${checkSvg}<span>Listo para tomar en botella de <strong>1L</strong> (olvídate de cuidar los búlgaros en casa).</span></li>
         <li>${checkSvg}<span>Libre de lactosa, libre de gluten y sin azúcares añadidos.</span></li>
       </ul>
       <div class="hero-actions">
-        ${btnWa('Pedir botella 1L por WhatsApp', 'Hola SanaVida, quiero pedir Yoghurt de Pajaritos / kéfir artesanal en botella de 1 Litro', 'btn-cta')}
+        ${btnWa('Pedir botella 1L por WhatsApp', 'Hola SanaVida, quiero pedir Yoghurt de Pajaritos / kéfir natural en botella de 1 Litro', 'btn-cta')}
         <a class="btn btn-ghost" href="#nutricion">Ver lab y nutrición ${icon('arrow')}</a>
       </div>
       <ul class="seal-row" aria-label="Sellos del producto">
@@ -57,7 +57,7 @@ export const bodyFlow = () => `
 <section class="section body-flow" id="como-funciona" aria-labelledby="flow-title">
   <div class="wrap">
     <p class="eyebrow">Cómo actúa</p>
-    <h2 id="flow-title" class="h2">Del Nódulo Vivo a tu Bienestar: Así Funciona Nuestro <em>Kéfir Artesanal</em></h2>
+    <h2 id="flow-title" class="h2">Del Nódulo Vivo a tu Bienestar: Así Funciona Nuestro <em>kéfir natural</em></h2>
     <ol class="flow-4">
       <li>
         <span class="flow-n" aria-hidden="true">01</span>
@@ -72,7 +72,7 @@ export const bodyFlow = () => `
       <li>
         <span class="flow-n" aria-hidden="true">03</span>
         <h3>Compuestos Bioactivos</h3>
-        <p>Durante la fermentación artesanal se producen vitaminas, ácidos orgánicos y péptidos naturales.</p>
+        <p>Durante la fermentación natural se producen vitaminas, ácidos orgánicos y péptidos naturales.</p>
       </li>
       <li>
         <span class="flow-n" aria-hidden="true">04</span>
