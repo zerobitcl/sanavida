@@ -31,14 +31,15 @@ const orgSchema = {
 };
 
 export const nav = [
-  { href: '/kefir-en-botella/', label: 'Kéfir en botella' },
-  { href: '/como-tomar-kefir/', label: 'Cómo empezar' },
-  { href: '/kefir-beneficios-digestion/', label: 'Beneficios' },
-  { href: '/bacterias-del-kefir/', label: 'Qué contiene' },
-  { href: '/pedido-kefir-iv-region/', label: 'Entregas IV Región' },
+  { href: '/catalogo/', label: 'Catálogo' },
+  { href: '/recetas-con-kefir/', label: 'Recetas' },
+  { href: '/blog/', label: 'Blog' },
+  { href: '/pedido/', label: 'Pedir' },
+  { href: '/cotizacion/', label: 'Cotizar' },
 ];
 
 export const footerGuides = [
+  { href: '/catalogo/', label: 'Catálogo y promociones' },
   { href: '/kefir-en-botella/', label: 'Kéfir en botella' },
   { href: '/yogurt-de-pajaritos/', label: 'Yogurt de pajaritos' },
   { href: '/kefir-beneficios-digestion/', label: 'Beneficios digestivos' },
@@ -46,13 +47,21 @@ export const footerGuides = [
   { href: '/como-tomar-kefir/', label: 'Cómo tomarlo' },
   { href: '/bulgaros-de-kefir/', label: 'Búlgaros' },
   { href: '/recetas-con-kefir/', label: 'Recetas' },
+  { href: '/blog/', label: 'Blog' },
   { href: '/kefir-intolerancia-lactosa/', label: 'Kéfir y lactosa' },
   { href: '/probioticos-naturales/', label: 'Kéfir y probióticos' },
   { href: '/bacterias-del-kefir/', label: 'Qué contiene el kéfir' },
-  { href: '/pedido-kefir-iv-region/', label: `Pedido ${site.regionShort}` },
+  { href: '/pedido-kefir-iv-region/', label: `Entregas ${site.regionShort}` },
 ];
 
-export function layout({ slug, title, description, body, schema = [], ogType = 'website' }) {
+export const footerShop = [
+  { href: '/pedido/', label: 'Formulario de pedido' },
+  { href: '/cotizacion/', label: 'Cotización' },
+  { href: '/politicas/', label: 'Políticas y condiciones' },
+  { href: '/pedido-kefir-iv-region/', label: `Cobertura ${site.regionShort}` },
+];
+
+export function layout({ slug, title, description, body, schema = [], ogType = 'website', noindex = false }) {
   const path = pagePath(slug === '404' ? '' : slug);
   // Ruta relativa: el navegador y Google la resuelven contra el host actual
   // (temporal o definitivo) sin rebuild. Si site.url está definido, canonical/OG absolutos.
@@ -60,6 +69,9 @@ export function layout({ slug, title, description, body, schema = [], ogType = '
   const graph = { '@context': 'https://schema.org', '@graph': [orgSchema, ...schema] };
   const navList = `<ul>${nav.map((n) => `<li><a href="${n.href}"${n.href === pagePath(slug) ? ' aria-current="page"' : ''}>${n.label}</a></li>`).join('')}</ul>`;
   const ogAbs = Boolean(site.url);
+  const robots = noindex
+    ? 'noindex,nofollow'
+    : 'index,follow,max-image-preview:large';
 
   return `<!doctype html>
 <html lang="${site.lang}">
@@ -69,7 +81,7 @@ export function layout({ slug, title, description, body, schema = [], ogType = '
 <title>${esc(title)}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${canonical}">
-<meta name="robots" content="index,follow,max-image-preview:large">
+<meta name="robots" content="${robots}">
 <meta name="theme-color" content="#FFFCF8">
 <meta name="geo.region" content="CL-CO">
 <meta name="geo.placename" content="${site.city}">
@@ -85,8 +97,8 @@ ${ogAbs ? `<meta property="og:url" content="${canonical}">
 <link rel="apple-touch-icon" href="/img/brand/apple-touch-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- Sólo 2 familias variables: el serif carga identidad artesanal; display=swap evita bloquear el LCP. -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400..700&family=Instrument+Sans:wght@400..700&display=swap">
+<!-- Fredoka ≈ letra redonda/gruesa del logo; Nunito para leer párrafos sin pelear con la marca. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400..800&display=swap">
 <link rel="stylesheet" href="/styles.css">
 <script type="application/ld+json">${JSON.stringify(graph)}</script>
 </head>
@@ -100,7 +112,7 @@ ${ogAbs ? `<meta property="og:url" content="${canonical}">
       <summary aria-label="Abrir menú"><span></span><span></span><span></span></summary>
       <nav aria-label="Principal móvil">${navList}</nav>
     </details>
-    <a class="btn btn-sm btn-wa header-cta" href="${waLink()}" target="_blank" rel="noopener">${icon('wa')}<span>Pedir</span></a>
+    <a class="btn btn-sm btn-wa header-cta" href="/pedido/">${icon('wa')}<span>Pedir</span></a>
   </div>
 </header>
 <main id="main">
@@ -119,13 +131,13 @@ ${body}
     <div>
       <h2 class="foot-h">Pedidos</h2>
       <ul>
+        ${footerShop.map((n) => `<li><a href="${n.href}">${n.label}</a></li>`).join('')}
         <li><a href="${waLink()}" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="${site.instagram}" target="_blank" rel="noopener">Instagram ${site.instagramHandle}</a></li>
-        <li><a href="/pedido-kefir-iv-region/">Entregas ${site.regionShort}</a></li>
       </ul>
     </div>
   </div>
-  <div class="wrap foot-legal"><small>© ${new Date().getFullYear()} ${site.name} · Elaborado por ${site.legal.company} (RUT ${site.legal.rut}) · ${site.legal.address}, ${site.city}, ${site.region}, Chile · Res. Exenta N.º ${site.legal.seremi.resolution}</small></div>
+  <div class="wrap foot-legal"><small>© ${new Date().getFullYear()} ${site.name} · Elaborado por ${site.legal.company} (RUT ${site.legal.rut}) · ${site.legal.address}, ${site.city}, ${site.region}, Chile · Res. Exenta N.º ${site.legal.seremi.resolution} · <a href="/politicas/">Políticas</a></small></div>
 </footer>
 <a class="fab" href="${waLink()}" target="_blank" rel="noopener" aria-label="Pedir kéfir por WhatsApp">${icon('wa')}<span>Pedir kéfir</span></a>
 </body>

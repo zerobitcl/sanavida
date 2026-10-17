@@ -20,13 +20,13 @@ export default landing({
   description: 'Kéfir o yogur industrial: comparamos microorganismos vivos, lactosa, azúcar y aditivos. Descubre cuál conviene si sufres de gases o inflamación.',
   eyebrow: 'Comparativa honesta',
   h1: 'Kéfir vs yogur industrial: <em>cuál elegir</em> si sufres de gases e inflamación',
-  lead: 'Ambos son lácteos fermentados, pero no son lo mismo. Te mostramos las diferencias que importan cuando lo que buscas es cuidar tu digestión, no solo comer algo rico.',
+  lead: 'Para notar el cambio necesitas un kéfir real. Las opciones del súper suelen perder el cultivo vivo para durar meses en góndola. Aquí comparamos qué importa de verdad para tu digestión.',
   cta: 'Probar kéfir artesanal',
   keyFacts: [
     'El kéfir tiene mucha más diversidad de microorganismos.',
     'Suele tener menos lactosa y cero azúcar añadida.',
-    'El yogur es más suave y cremoso: buena puerta de entrada.',
-    'Lo clave es que el cultivo llegue vivo.',
+    'El del súper a menudo se trata para alargar la vida útil.',
+    'Lo clave es que el cultivo llegue vivo a tu cuerpo.',
   ],
   sections: [
     {
@@ -68,6 +68,6 @@ export default landing({
     { q: '¿Puedo reemplazar el yogur por kéfir en recetas?', a: 'Sí. Funciona en batidos, avena remojada, aderezos y marinadas. Al ser más líquido, en recetas que requieren cuerpo puedes colarlo unas horas para obtener un kéfir más espeso.' },
     { q: '¿El kéfir engorda más que el yogur?', a: 'Un kéfir de leche sin azúcar tiene calorías similares a la leche con que se prepara. Muchos yogures comerciales aportan más calorías por el azúcar añadida.' },
   ],
-  ctaTitle: 'Haz la prueba tú mismo/a',
-  ctaText: 'Pide tu kéfir artesanal y compáralo con el yogur de siempre.',
+  ctaTitle: 'Prueba una opción 100% natural y artesanal',
+  ctaText: 'Haz tu pedido hoy con envío a domicilio. Kéfir real, no de góndola.',
 });

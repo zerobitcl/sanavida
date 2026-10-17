@@ -59,7 +59,7 @@ export const jarArt = () => `
   <path d="M130 46h60v30c0 10 6 18 14 24 18 14 30 30 30 52v172c0 13-11 24-24 24H110c-13 0-24-11-24-24V152c0-22 12-38 30-52 8-6 14-14 14-24V46z" fill="url(#glass)" stroke="#fff" stroke-opacity=".7" stroke-width="2"/>
   <rect x="112" y="168" width="96" height="92" rx="46" fill="#E6007E"/>
   <path d="M160 230s-13-8-13-16.5a6.8 6.8 0 0 1 13-3.4 6.8 6.8 0 0 1 13 3.4c0 8.5-13 16.5-13 16.5z" fill="none" stroke="#fff" stroke-width="3" stroke-linejoin="round"/>
-  <text x="160" y="288" text-anchor="middle" font-family="Fraunces, Georgia, serif" font-size="16" letter-spacing="3" fill="#6B2A83">SANA VIDA</text>
+  <text x="160" y="288" text-anchor="middle" font-family="Fredoka, Trebuchet MS, sans-serif" font-size="16" font-weight="700" letter-spacing="2" fill="#6B2A83">SANA VIDA</text>
 </svg>`;
 
 export const breadcrumbs = (items) => `
@@ -112,7 +112,10 @@ export const delivery = () => `
   </div>
 </section>`;
 
-export const ctaBand = (title = '¿Listo para que tu microbiota te lo agradezca?', text = `Haz tu pedido por WhatsApp y coordinamos la entrega en la ${site.regionShort}.`) => `
+export const ctaBand = (
+  title = '¿Listo para probar un kéfir real?',
+  text = `100% natural y artesanal. Haz tu pedido hoy con envío a domicilio en la ${site.regionShort}.`,
+) => `
 <section class="cta-band">
   <div class="wrap cta-inner">
     <div>
@@ -125,17 +128,21 @@ export const ctaBand = (title = '¿Listo para que tu microbiota te lo agradezca?
 
 // Máximo 4 tarjetas: con 9+ landings mostrar todas diluye el CTA y satura el scroll.
 const RELATED_PRIORITY = [
+  'catalogo',
+  'pedido',
   'kefir-en-botella',
   'pedido-kefir-iv-region',
   'como-tomar-kefir',
   'bacterias-del-kefir',
   'recetas-con-kefir',
+  'blog',
   'kefir-beneficios-digestion',
   'yogurt-de-pajaritos',
   'probioticos-naturales',
   'kefir-intolerancia-lactosa',
   'kefir-vs-yogurt',
   'bulgaros-de-kefir',
+  'cotizacion',
 ];
 
 export const related = (current, pages) => {

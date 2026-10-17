@@ -11,14 +11,14 @@ export default landing({
   description: 'Beneficios del kéfir para la digestión, los gases, la hinchazón y el colon irritable: cómo tomarlo y precauciones. Kéfir artesanal en la IV Región.',
   eyebrow: 'Salud digestiva',
   h1: 'Kéfir para gases, inflamación y <em>colon irritable</em>: lo que sí puede hacer por ti',
-  lead: 'Hinchazón después de comer, gases, digestiones pesadas. Si te suena familiar, el kéfir puede ser un buen aliado. Te explicamos por qué, cómo empezar y en qué casos conviene consultar primero.',
+  lead: 'Hinchazón, gases, pesadez, estreñimiento. Consumir kéfir regularmente puede ayudar a desinflamar el abdomen, mejorar la digestión y que tu cuerpo absorba mejor los nutrientes — protegiéndote del malestar de estómago.',
   cta: 'Quiero probar el kéfir',
   ctaMsg: 'Hola SanaVida, quiero probar el kéfir para mejorar mi digestión',
   keyFacts: [
-    'Contiene bacterias ácido-lácticas y levaduras viables.',
+    'Repleto de bacterias buenas y probióticos naturales.',
+    'Puede ayudar con gases, hinchazón y digestión pesada.',
     'La fermentación reduce buena parte de la lactosa.',
-    'Puede ayudar a una digestión más liviana.',
-    'Empieza con cucharadas y sube de forma gradual.',
+    'Debe ser kéfir real: sin pasteurizar, no de góndola.',
   ],
   startPlan: true,
   midCta: '¿Sufres de gases o hinchazón? Te orientamos para empezar con la dosis justa.',
@@ -27,7 +27,7 @@ export default landing({
       id: 'como-actua',
       title: 'Cómo actúa el kéfir en tu intestino',
       html: `<p>Tu intestino alberga billones de microorganismos: la <strong>microbiota intestinal</strong>. Cuando está en equilibrio, ayuda a digerir, produce compuestos que nutren la pared intestinal y conversa con tu sistema inmune. Cuando se desequilibra (estrés, antibióticos, dieta ultraprocesada), aparecen con frecuencia gases, hinchazón y cambios en el tránsito.</p>
-<p>El kéfir es uno de los alimentos fermentados con <strong>mayor diversidad de microorganismos</strong>. Al consumirlo con regularidad, aportas bacterias ácido-lácticas y levaduras que pueden colaborar a mantener ese equilibrio. Además, durante la fermentación se generan ácidos orgánicos y péptidos que se estudian por su efecto en la salud digestiva.</p>`,
+<p>El kéfir está repleto de <strong>bacterias buenas y probióticos naturales</strong> que pueden ayudar a limpiar el intestino, combatir los gases y devolverle el equilibrio a tu sistema digestivo. Es uno de los fermentados con mayor diversidad microbiana.</p>`,
     },
     {
       id: 'gases-hinchazon',
@@ -49,16 +49,17 @@ export default landing({
       id: 'otros-beneficios',
       title: 'Otros beneficios del kéfir',
       html: `<ul>
-<li><strong>Sistema inmune:</strong> gran parte de las defensas del cuerpo se relaciona con el intestino; una microbiota diversa contribuye a su buen funcionamiento.</li>
-<li><strong>Nutrición:</strong> aporta proteínas de alta calidad, calcio, fósforo y vitaminas del grupo B.</li>
-<li><strong>Bienestar general:</strong> el eje intestino-cerebro es un área de investigación activa; muchas personas reportan sentirse mejor en general al cuidar su digestión.</li>
+<li><strong>Ánimo y descanso:</strong> gran parte de la serotonina se produce en el intestino. Cuando la digestión se equilibra, muchas personas notan mejor humor, más claridad mental y mejor sueño.</li>
+<li><strong>Sistema inmune:</strong> gran parte de las defensas se relaciona con el intestino; cuidarlo es cuidarte por dentro.</li>
+<li><strong>Nutrición y energía:</strong> ayuda a absorber mejor los nutrientes de las comidas y aporta proteínas, calcio y vitaminas del grupo B.</li>
+<li><strong>Piel y bienestar:</strong> al reducir inflamación digestiva, a menudo se nota también por fuera (menos “cara inflamada”, más vitalidad).</li>
 </ul>`,
     },
     {
       id: 'por-que-vivo',
       title: 'Por qué importa que el kéfir esté vivo',
-      html: `<p>Todos estos beneficios dependen de que los microorganismos <strong>lleguen activos</strong>. Un producto pasteurizado después de fermentar conserva el sabor, pero pierde gran parte de su cultivo.</p>
-<p>El kéfir SanaVida <strong>no se pasteuriza</strong>, no lleva conservantes y se entrega fresco en la IV Región, para que recibas el cultivo en su mejor momento. Compara las diferencias en <a href="/kefir-vs-yogurt/">kéfir vs yogur industrial</a>.</p>`,
+      html: `<p>Para obtener estos resultados necesitas un <strong>kéfir real</strong>. Las opciones del supermercado suelen pasar por procesos térmicos o industriales para durar meses en góndola: eso destruye buena parte de las bacterias buenas y el efecto reparador.</p>
+<p>El kéfir SanaVida es <strong>100% natural y artesanal</strong>: no se pasteuriza, no lleva conservantes y se entrega fresco en la IV Región. Compara en <a href="/kefir-vs-yogurt/">kéfir vs yogur industrial</a>.</p>`,
     },
     {
       id: 'precauciones',
@@ -76,6 +77,6 @@ export default landing({
     { q: '¿El kéfir puede dar gases al principio?', a: 'Sí, es habitual durante los primeros días mientras tu intestino se adapta. Por eso conviene partir con porciones pequeñas.' },
     { q: '¿Lo puedo tomar si soy intolerante a la lactosa?', a: 'Muchas personas con intolerancia leve lo toleran bien, porque la fermentación reduce buena parte de la lactosa. Si tu intolerancia es severa, pruébalo en cantidades muy pequeñas y consulta a tu médico.' },
   ],
-  ctaTitle: 'Dale a tu digestión un aliado vivo',
-  ctaText: 'Kéfir artesanal no pasteurizado, entregado fresco en la IV Región.',
+  ctaTitle: 'Prueba una opción 100% natural y artesanal',
+  ctaText: 'Haz tu pedido hoy con envío a domicilio. Kéfir real, sin pasar por la góndola.',
 });

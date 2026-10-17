@@ -1,0 +1,81 @@
+// Mapa canónico de secciones. El build importa las páginas; este archivo documenta
+// el esqueleto del sitio y qué falta por rellenar / activar (backend, PDF, IA).
+export const sections = [
+  {
+    id: 'inicio',
+    label: 'Inicio y presentación',
+    slug: '',
+    status: 'live',
+    note: 'Home con marca, prueba social y CTA a pedido.',
+  },
+  {
+    id: 'catalogo',
+    label: 'Catálogo de productos y promociones',
+    slug: 'catalogo',
+    status: 'shell',
+    note: 'Grilla de productos + slots de promo. Copy y precios pendientes.',
+  },
+  {
+    id: 'landings',
+    label: 'Landings para anuncios',
+    slug: null,
+    status: 'live',
+    note: 'Landings SEO/ads existentes en /src/pages/* (kéfir, beneficios, pedido, etc.).',
+  },
+  {
+    id: 'pedido',
+    label: 'Formulario de pedidos y aviso a Paola',
+    slug: 'pedido',
+    status: 'shell',
+    note: 'Formulario estructurado. Por ahora WhatsApp; luego API + notificación a Paola.',
+  },
+  {
+    id: 'politicas',
+    label: 'Políticas y condiciones',
+    slug: 'politicas',
+    status: 'shell',
+    note: 'Términos, privacidad, entregas y reembolsos — texto legal pendiente.',
+  },
+  {
+    id: 'blog',
+    label: 'Sección de blog',
+    slug: 'blog',
+    status: 'shell',
+    note: 'Índice + posts. Contenido fino y flujo IA pendientes.',
+  },
+  {
+    id: 'recetas',
+    label: 'Sección de recetas',
+    slug: 'recetas-con-kefir',
+    status: 'live',
+    note: 'Guía de recetas existente; se puede expandir a índice multi-receta.',
+  },
+  {
+    id: 'dashboard',
+    label: 'Dashboard de pedidos, pagos y entregas',
+    slug: 'dashboard',
+    status: 'shell',
+    note: 'UI privada (noindex). Requiere auth + DB.',
+  },
+  {
+    id: 'cotizaciones',
+    label: 'Sistema de cotizaciones (Api2Pdf)',
+    slug: 'cotizacion',
+    status: 'live',
+    note: 'Formulario → PDF premium con logo (Api2Pdf) + aviso WhatsApp a Paola. Requiere serve.mjs + API2PDF_API_KEY.',
+  },
+  {
+    id: 'seo',
+    label: 'Optimización SEO para Google',
+    slug: null,
+    status: 'live',
+    note: 'Meta, canonical, JSON-LD, sitemap/robots cuando hay dominio.',
+  },
+  {
+    id: 'seo-ia',
+    label: 'Optimización de contenido con IA',
+    slug: null,
+    status: 'planned',
+    note: 'Flujo/herramienta para brief → borrador SEO. No es página pública.',
+  },
+];

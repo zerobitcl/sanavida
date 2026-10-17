@@ -49,7 +49,7 @@ export const site = {
     servings: 5,
     servingMl: 200,
     // price en CLP. null = Product schema sin offers (Google no muestra rich result de precio).
-    price: null,
+    price: 8000,
     ingredients: ['Leche entera', 'Búlgaros vivos'],
     conservation: 'Mantener refrigerado entre 4° y 8°C. Agitar antes de consumir.',
     seals: [
@@ -100,10 +100,13 @@ export const site = {
   },
   logo: { src: '/img/brand/logo-240.png', large: '/img/brand/logo-480.png', w: 1179, h: 786 },
   claims: {
-    short: 'Kéfir artesanal fermentado con búlgaros vivos',
+    short: 'Kéfir artesanal vivo: bacterias buenas para sentirte bien',
     science:
       'Contiene 40 millones de UFC/g de bacterias ácido-lácticas y 5,6 millones de UFC/g de levaduras, certificadas por Laboratorio Analab, propias de la fermentación con nódulos de kéfir.',
     slogan: 'Alimenta hoy tu bienestar de mañana',
+    // Guion ads 05-10-26: contraste súper vs artesanal (repetido en los 4 videos).
+    vsSuper:
+      'Las opciones del supermercado pasan por procesos industriales para durar meses en góndola y pierden el cultivo vivo. SanaVida es kéfir real: 100% natural, sin pasteurizar, con envío fresco.',
   },
   deliveryPoints: [
     { name: 'Sector Atenas y Villa El Ingenio', note: 'Entrega semanal gratis · Ovalle' },

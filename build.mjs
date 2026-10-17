@@ -9,15 +9,40 @@ import digestion from './src/pages/kefir-beneficios-digestion.mjs';
 import vsYogurt from './src/pages/kefir-vs-yogurt.mjs';
 import comoTomar from './src/pages/como-tomar-kefir.mjs';
 import bulgaros from './src/pages/bulgaros-de-kefir.mjs';
-import pedido from './src/pages/pedido-kefir-iv-region.mjs';
+import pedidoRegion from './src/pages/pedido-kefir-iv-region.mjs';
 import recetas from './src/pages/recetas-con-kefir.mjs';
 import lactosa from './src/pages/kefir-intolerancia-lactosa.mjs';
 import probioticos from './src/pages/probioticos-naturales.mjs';
 import bacterias from './src/pages/bacterias-del-kefir.mjs';
 import botella from './src/pages/kefir-en-botella.mjs';
+import catalogo from './src/pages/catalogo.mjs';
+import pedido from './src/pages/pedido.mjs';
+import politicas from './src/pages/politicas.mjs';
+import blog from './src/pages/blog.mjs';
+import cotizacion from './src/pages/cotizacion.mjs';
+import dashboard from './src/pages/dashboard.mjs';
 
 const OUT = 'dist';
-const pages = [home, pajaritos, digestion, vsYogurt, comoTomar, bulgaros, pedido, recetas, lactosa, probioticos, bacterias, botella];
+const pages = [
+  home,
+  catalogo,
+  pedido,
+  politicas,
+  blog,
+  cotizacion,
+  dashboard,
+  pajaritos,
+  digestion,
+  vsYogurt,
+  comoTomar,
+  bulgaros,
+  pedidoRegion,
+  recetas,
+  lactosa,
+  probioticos,
+  bacterias,
+  botella,
+];
 const today = new Date().toISOString().slice(0, 10);
 
 // Minificado conservador (sin dependencias): colapsa espacios entre etiquetas y comentarios.
@@ -39,7 +64,17 @@ const withCss = (html) => html.replace('href="/styles.css"', `href="/${cssFile}"
 
 for (const page of pages) {
   const { body, schema, ogType } = page.render(pages);
-  const html = withCss(layout({ slug: page.slug, title: page.title, description: page.description, body, schema, ogType }));
+  const html = withCss(
+    layout({
+      slug: page.slug,
+      title: page.title,
+      description: page.description,
+      body,
+      schema,
+      ogType,
+      noindex: Boolean(page.noindex),
+    }),
+  );
   const dir = join(OUT, page.slug);
   await mkdir(dir, { recursive: true });
   await writeFile(join(dir, 'index.html'), minHtml(html));
@@ -64,7 +99,10 @@ if (site.url) {
     join(OUT, 'sitemap.xml'),
     `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${pages.map((p) => `  <url><loc>${base}/${p.slug ? p.slug + '/' : ''}</loc><lastmod>${today}</lastmod><priority>${p.slug ? '0.8' : '1.0'}</priority></url>`).join('\n')}
+${pages
+  .filter((p) => !p.noindex)
+  .map((p) => `  <url><loc>${base}/${p.slug ? p.slug + '/' : ''}</loc><lastmod>${today}</lastmod><priority>${p.slug ? '0.8' : '1.0'}</priority></url>`)
+  .join('\n')}
 </urlset>
 `,
   );
