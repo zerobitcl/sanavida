@@ -1,5 +1,6 @@
 import { site } from '../config.mjs';
 import { shellPage } from '../shell.mjs';
+import { icon } from '../components.mjs';
 
 const kpis = [
   { label: 'Pedidos hoy', value: '—' },
@@ -16,12 +17,16 @@ const rows = [
 
 const dashHtml = `
 <div class="dash">
+  <div class="dash-tools hero-actions" style="margin-bottom:1.5rem">
+    <a class="btn btn-cta" href="/cotizacion/">Abrir cotizador PDF</a>
+    <a class="btn btn-ghost" href="/pedido/">Ver pedidos públicos</a>
+  </div>
   <div class="dash-kpis">
     ${kpis.map((k) => `<div class="dash-kpi"><span>${k.label}</span><strong>${k.value}</strong></div>`).join('')}
   </div>
   <div class="dash-panels">
     <section class="dash-panel" aria-labelledby="dash-pedidos">
-      <h3 id="dash-pedidos">Pedidos</h3>
+      <h3 id="dash-pedidos">Pedidos (vista previa)</h3>
       <div class="dash-table-wrap">
         <table class="dash-table">
           <thead><tr><th>ID</th><th>Cliente</th><th>Comuna</th><th>Estado</th><th>Pago</th><th>Entrega</th></tr></thead>
@@ -32,13 +37,13 @@ const dashHtml = `
       </div>
     </section>
     <section class="dash-panel" aria-labelledby="dash-ops">
-      <h3 id="dash-ops">Operación</h3>
+      <h3 id="dash-ops">Cómo usarlo</h3>
       <ul class="shell-steps">
-        <li><strong>Pedidos</strong><span>Entrada desde /pedido y WhatsApp.</span></li>
-        <li><strong>Pagos</strong><span>Transferencia / efectivo · conciliación manual primero.</span></li>
+        <li><strong>Pedidos chicos</strong><span>Llegan por WhatsApp o el formulario /pedido.</span></li>
+        <li><strong>Pedidos grandes</strong><span>Tú abres el cotizador, generas el PDF y se lo mandas al cliente.</span></li>
         <li><strong>Entregas</strong><span>Puntos Ovalle + rutas ${site.regionShort}.</span></li>
       </ul>
-      <p class="shell-muted">Auth, base de datos y roles (Paola / admin) se conectan en la fase dinámica. Esta URL irá <code>noindex</code>.</p>
+      <p class="shell-muted">Esta zona es interna (no aparece en el menú ni en Google). Guarda el enlace: <code>/dashboard/</code></p>
     </section>
   </div>
 </div>`;
@@ -48,15 +53,15 @@ export default {
     slug: 'dashboard',
     nav: 'Dashboard',
     tag: 'Ops',
-    title: `Dashboard · ${site.name}`,
-    description: 'Panel interno de pedidos, pagos y entregas SanaVida.',
+    title: `Panel · ${site.name}`,
+    description: 'Panel interno de pedidos, pagos, entregas y cotizaciones SanaVida.',
     eyebrow: 'Interno',
-    h1: `Pedidos, pagos y <em>entregas</em>`,
-    lead: 'Vista operativa para Paola. Datos de ejemplo; sin login todavía.',
-    stubNote: 'UI shell. Requiere auth, API y persistencia. No publicar en sitemap.',
+    h1: `Pedidos, pagos y <em>cotizaciones</em>`,
+    lead: 'Cotizador PDF, pedidos y entregas.',
     hideCta: true,
     hideCtaBand: true,
     noindex: true,
+    actions: `<a class="btn btn-cta" href="/cotizacion/">${icon('arrow')}<span>Ir al cotizador</span></a>`,
     blocks: [
       {
         id: 'panel',

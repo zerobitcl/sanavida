@@ -62,7 +62,7 @@ export const sections = [
     label: 'Sistema de cotizaciones (Api2Pdf)',
     slug: 'cotizacion',
     status: 'live',
-    note: 'Formulario → PDF premium con logo (Api2Pdf) + aviso WhatsApp a Paola. Requiere serve.mjs + API2PDF_API_KEY.',
+    note: 'Interno para Paola (noindex, fuera del menú). Genera PDF y lo envía al cliente por WhatsApp. Entrada: /dashboard/',
   },
   {
     id: 'seo',

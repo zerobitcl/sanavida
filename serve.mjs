@@ -3,7 +3,7 @@ import { readFile, stat } from 'node:fs/promises';
 import { join, extname, normalize } from 'node:path';
 import { loadEnv } from './src/env.mjs';
 import { htmlToPdf } from './src/api2pdf.mjs';
-import { buildQuoteHtml, summarizeQuoteForWa } from './src/quote-template.mjs';
+import { buildQuoteHtml, summarizeQuoteForWa, waDigits } from './src/quote-template.mjs';
 import { site } from './src/config.mjs';
 
 loadEnv();
@@ -81,11 +81,12 @@ async function handleCotizacion(req, res) {
       apiKey: process.env.API2PDF_API_KEY,
     });
     const waText = summarizeQuoteForWa({ id, input: payload, fileUrl: pdf.FileUrl });
+    const to = waDigits(payload.telefono, site.whatsapp);
     return json(res, 200, {
       ok: true,
       id,
       fileUrl: pdf.FileUrl,
-      waUrl: `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(waText)}`,
+      waUrl: `https://wa.me/${to}?text=${encodeURIComponent(waText)}`,
     });
   } catch (err) {
     console.error('cotizacion:', err.message);

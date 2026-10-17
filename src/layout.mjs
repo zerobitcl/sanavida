@@ -35,7 +35,6 @@ export const nav = [
   { href: '/recetas-con-kefir/', label: 'Recetas' },
   { href: '/blog/', label: 'Blog' },
   { href: '/pedido/', label: 'Pedir' },
-  { href: '/cotizacion/', label: 'Cotizar' },
 ];
 
 export const footerGuides = [
@@ -56,7 +55,6 @@ export const footerGuides = [
 
 export const footerShop = [
   { href: '/pedido/', label: 'Formulario de pedido' },
-  { href: '/cotizacion/', label: 'Cotización' },
   { href: '/politicas/', label: 'Políticas y condiciones' },
   { href: '/pedido-kefir-iv-region/', label: `Cobertura ${site.regionShort}` },
 ];

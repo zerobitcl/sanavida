@@ -142,7 +142,6 @@ const RELATED_PRIORITY = [
   'kefir-intolerancia-lactosa',
   'kefir-vs-yogurt',
   'bulgaros-de-kefir',
-  'cotizacion',
 ];
 
 export const related = (current, pages) => {

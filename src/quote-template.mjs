@@ -264,17 +264,24 @@ export function buildQuoteHtml(input) {
 </html>` };
 }
 
+/** Mensaje que Paola le manda al cliente con el PDF. */
 export function summarizeQuoteForWa({ id, input, fileUrl }) {
+  const nombre = input.empresa || 'hola';
   return [
-    `Hola Paola, nueva cotización ${id}:`,
-    `• Cliente: ${input.empresa || '—'}`,
-    `• Email: ${input.email || '—'}`,
-    `• Tel: ${input.telefono || '—'}`,
-    `• Tipo: ${TIPO_LABEL[input.tipo] || input.tipo || '—'}`,
-    `• Cantidad: ${input.cantidad || '—'}`,
-    `• Detalle: ${input.detalle || '—'}`,
+    `Hola ${nombre}, te envío la cotización ${id} de SanaVida (kéfir artesanal).`,
+    input.cantidad ? `• Cantidad: ${input.cantidad}` : '',
     fileUrl ? `• PDF: ${fileUrl}` : '',
+    'Cualquier duda, me escribes por aquí 😊',
   ]
     .filter(Boolean)
     .join('\n');
+}
+
+/** Normaliza teléfono a dígitos internacionales (Chile: asume 9XXXXXXXX → 569…). */
+export function waDigits(raw, fallback = site.whatsapp) {
+  let d = String(raw || '').replace(/\D+/g, '');
+  if (!d) return String(fallback || '').replace(/\D+/g, '');
+  if (d.length === 9 && d.startsWith('9')) d = `56${d}`;
+  if (d.length === 8) d = `569${d}`;
+  return d;
 }

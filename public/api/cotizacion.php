@@ -190,18 +190,22 @@ if ($status >= 400 || !$fileUrl) {
   exit;
 }
 
-$waText = "Hola Paola, nueva cotización {$id}:\n"
-  . "• Cliente: {$empresa}\n"
-  . "• Email: {$email}\n"
-  . "• Tel: " . ($telefono !== '' ? $telefono : '—') . "\n"
-  . "• Tipo: {$tipoLabel}\n"
-  . "• Cantidad: " . ($cantidad !== '' ? $cantidad : '—') . "\n"
-  . "• Detalle: " . ($detalle !== '' ? $detalle : '—') . "\n"
-  . "• PDF: {$fileUrl}";
+$clientWa = preg_replace('/\D+/', '', $telefono);
+if (strlen($clientWa) === 9 && str_starts_with($clientWa, '9')) {
+  $clientWa = '56' . $clientWa;
+}
+if ($clientWa === '') {
+  $clientWa = $wa;
+}
+
+$waText = "Hola {$empresa}, te envío la cotización {$id} de SanaVida (kéfir artesanal).\n"
+  . ($cantidad !== '' ? "• Cantidad: {$cantidad}\n" : '')
+  . "• PDF: {$fileUrl}\n"
+  . "Cualquier duda, me escribes por aquí 😊";
 
 echo json_encode([
   'ok' => true,
   'id' => $id,
   'fileUrl' => $fileUrl,
-  'waUrl' => 'https://wa.me/' . $wa . '?text=' . rawurlencode($waText),
+  'waUrl' => 'https://wa.me/' . $clientWa . '?text=' . rawurlencode($waText),
 ], JSON_UNESCAPED_UNICODE);
