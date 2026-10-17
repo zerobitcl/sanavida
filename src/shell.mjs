@@ -1,16 +1,6 @@
 import { site, pagePath } from './config.mjs';
 import { breadcrumbs, breadcrumbSchema, ctaBand, esc, btnWa, icon } from './components.mjs';
 
-/** Banner visible solo en shells: marca “estructura lista, copy pendiente”. */
-const stubBanner = (note) =>
-  note
-    ? `<aside class="shell-banner" role="status"><strong>Estructura lista</strong> — ${esc(note)}</aside>`
-    : '';
-
-/**
- * Página-shell: hero corto + bloques placeholder + CTA.
- * Usado para secciones nuevas mientras llega el contenido fino.
- */
 export function shellPage(page) {
   return {
     slug: page.slug,
@@ -29,7 +19,7 @@ export function shellPage(page) {
           (b) => `
 <section class="section shell-block" id="${esc(b.id)}" aria-labelledby="${esc(b.id)}-title">
   <div class="wrap">
-    <p class="eyebrow">${esc(b.eyebrow || 'Próximamente')}</p>
+    ${b.eyebrow ? `<p class="eyebrow">${esc(b.eyebrow)}</p>` : ''}
     <h2 id="${esc(b.id)}-title" class="h2">${b.title}</h2>
     ${b.lead ? `<p class="lead">${b.lead}</p>` : ''}
     ${b.html || ''}
@@ -42,10 +32,9 @@ export function shellPage(page) {
 <section class="hero hero-sub">
   <div class="wrap">
     ${breadcrumbs(crumbs)}
-    ${stubBanner(page.stubNote)}
     <p class="eyebrow">${esc(page.eyebrow || site.name)}</p>
     <h1 class="display display-sub">${page.h1}</h1>
-    <p class="lead">${page.lead}</p>
+    ${page.lead ? `<p class="lead">${page.lead}</p>` : ''}
     ${
       page.actions
         ? `<div class="hero-actions">${page.actions}</div>`
@@ -74,7 +63,7 @@ export const placeholderCard = ({ title, meta, body, href, cta = 'Ver' }) => `
     ${meta ? `<span class="tag">${esc(meta)}</span>` : ''}
     <h3>${esc(title)}</h3>
     <p>${esc(body)}</p>
-    ${href ? `<a class="link" href="${href}">${esc(cta)} ${icon('arrow')}</a>` : `<span class="shell-muted">Contenido pendiente</span>`}
+    ${href ? `<a class="link" href="${href}">${esc(cta)} ${icon('arrow')}</a>` : ''}
   </div>
 </article>`;
 

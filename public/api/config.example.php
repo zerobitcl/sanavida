@@ -1,7 +1,14 @@
 <?php
-// Copia este archivo como config.local.php y rellena (no subir config.local.php a git).
+// Copia como config.local.php (no subir a git).
 return [
   'api2pdf_key' => 'TU-API-KEY',
   'unit_price' => 8000,
   'whatsapp' => '56900000000',
+  'db' => [
+    'host' => '127.0.0.1',
+    'port' => 3306,
+    'name' => 'uXXXX_sanavida',
+    'user' => 'uXXXX_sanavida',
+    'password' => 'TU-PASSWORD',
+  ],
 ];

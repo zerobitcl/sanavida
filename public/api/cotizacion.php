@@ -3,6 +3,8 @@
  * Cotización PDF vía Api2Pdf — para Hostinger (PHP).
  * El front llama POST /api/cotizacion (rewrite → este archivo).
  */
+require_once __DIR__ . '/db.php';
+
 header('Content-Type: application/json; charset=utf-8');
 header('Cache-Control: no-store');
 
@@ -126,9 +128,9 @@ td{padding:12px;border-bottom:1px solid #e7d8e6;vertical-align:top}
   . '<p>Tipo: ' . $e($tipoLabel) . '</p></div>
 <div class="card"><h2>Emisor</h2><p><strong>SanaVida</strong></p><p>Inversiones Vitalia SpA</p><p>RUT 78.516.946-8</p>
 <p>Daniel Riquelme 735, Ovalle</p><p>WhatsApp +' . $e($wa) . '</p></div></div>
-<p class="intro">Gracias por tu interés en el <strong>kéfir artesanal SanaVida</strong>: cultivo vivo, sin pasteurizar, 100% natural. Cotización lista para confirmar con Paola.</p>
+<p class="intro">Gracias por tu interés en el <strong>kéfir natural SanaVida</strong>: cultivo vivo, sin pasteurizar, 100% natural. Cotización lista para confirmar con Paola.</p>
 <table><thead><tr><th>Descripción</th><th class="num">Cantidad</th><th class="num">P. unitario</th><th class="num">Total</th></tr></thead>
-<tbody><tr><td><p class="item">Kéfir artesanal SanaVida</p><p class="sub">1 L · Sabor Natural · Botella · Búlgaros vivos</p></td>
+<tbody><tr><td><p class="item">kéfir natural SanaVida</p><p class="sub">1 L · Sabor Natural · Botella · Búlgaros vivos</p></td>
 <td class="num">' . $e($qtyLabel) . '</td><td class="num">' . $e($clp($unit)) . '</td>
 <td class="num"><strong>' . $e($clp($subtotal)) . '</strong></td></tr>'
   . ($detalle !== '' ? '<tr><td colspan="4"><p class="sub"><strong>Detalle:</strong> ' . $e($detalle) . '</p></td></tr>' : '')
@@ -140,7 +142,7 @@ td{padding:12px;border-bottom:1px solid #e7d8e6;vertical-align:top}
 <li>Precio unitario referencial: ' . $e($clp($unit)) . ' CLP por botella 1 L.</li>
 <li>Producto refrigerado 4°–8°C. Consumir preferentemente en 7–10 días.</li>
 <li>Entregas en Ovalle y rutas consolidadas en la IV Región.</li>
-<li>Validez 15 días · sujeta a disponibilidad artesanal · Res. SEREMI N.º 2604496921.</li>
+<li>Validez 15 días · sujeta a disponibilidad de elaboración · Res. SEREMI N.º 2604496921.</li>
 </ul></div>
 <div class="foot"><span>@sanavida_kefir</span><span>Inversiones Vitalia SpA · 78.516.946-8</span></div>
 </div></body></html>';
@@ -198,14 +200,50 @@ if ($clientWa === '') {
   $clientWa = $wa;
 }
 
-$waText = "Hola {$empresa}, te envío la cotización {$id} de SanaVida (kéfir artesanal).\n"
+$waText = "Hola {$empresa}, te envío la cotización {$id} de SanaVida (kéfir natural).\n"
   . ($cantidad !== '' ? "• Cantidad: {$cantidad}\n" : '')
   . "• PDF: {$fileUrl}\n"
   . "Cualquier duda, me escribes por aquí 😊";
+
+$quoteNumber = 1;
+$isReturning = false;
+try {
+  $phoneKey = sv_phone($telefono);
+  if ($phoneKey !== '') {
+    $pdo = sv_pdo();
+    $pdo->beginTransaction();
+    [$client] = sv_upsert_client($pdo, $phoneKey, $empresa, $email);
+    $quoteNumber = ((int) $client['quotes_count']) + 1;
+    $isReturning = $quoteNumber > 1;
+    $now = (new DateTimeImmutable('now', new DateTimeZone('America/Santiago')))->format('Y-m-d H:i:s');
+    $ins = $pdo->prepare('INSERT INTO quotes (client_id, phone, quote_code, empresa, email, tipo, cantidad, detalle, unit_price, pdf_url, quote_number, created_at) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)');
+    $ins->execute([
+      (int) $client['id'],
+      $phoneKey,
+      $id,
+      $empresa,
+      $email,
+      $tipo,
+      $cantidad,
+      $detalle !== '' ? $detalle : null,
+      $unit,
+      $fileUrl,
+      $quoteNumber,
+      $now,
+    ]);
+    $pdo->prepare('UPDATE clients SET quotes_count = quotes_count + 1, last_seen_at = ? WHERE id = ?')->execute([$now, $client['id']]);
+    $pdo->commit();
+  }
+} catch (Throwable $e) {
+  if (isset($pdo) && $pdo->inTransaction()) $pdo->rollBack();
+  // El PDF ya se generó; no fallamos la respuesta por un error de historial.
+}
 
 echo json_encode([
   'ok' => true,
   'id' => $id,
   'fileUrl' => $fileUrl,
   'waUrl' => 'https://wa.me/' . $clientWa . '?text=' . rawurlencode($waText),
+  'quoteNumber' => $quoteNumber,
+  'isReturning' => $isReturning,
 ], JSON_UNESCAPED_UNICODE);

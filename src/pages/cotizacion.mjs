@@ -29,7 +29,7 @@ const formHtml = `
       placeholder: 'Comuna, día de entrega, condiciones especiales…',
     })}
   </div>
-  <p class="shell-form-note">Uso interno: rellena los datos del cliente, genera el PDF con logo y precio ($8.000), y envíaselo por WhatsApp.</p>
+  <p class="shell-form-note">Precio de referencia: $8.000 por botella de 1 L.</p>
   <div class="hero-actions">
     <button class="btn btn-cta" type="submit" id="cotizacion-submit">Generar PDF</button>
     <a class="btn btn-ghost" href="/dashboard/">Volver al panel</a>
@@ -104,9 +104,9 @@ export default {
     tag: 'Interno',
     title: `Cotizador interno · ${site.name}`,
     description: 'Herramienta interna para generar cotizaciones PDF de pedidos grandes.',
-    eyebrow: 'Solo Paola',
+    eyebrow: site.name,
     h1: `Cotizador para pedidos <em>grandes</em>`,
-    lead: 'Arma una cotización con logo y precio, descárgala y envíasela al cliente por WhatsApp. Los pedidos chicos siguen por el formulario público o WhatsApp.',
+    lead: 'Genera una cotización PDF con logo y precio, y envíasela al cliente por WhatsApp.',
     hideCta: true,
     hideCtaBand: true,
     noindex: true,

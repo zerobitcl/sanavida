@@ -2,11 +2,8 @@ import { site } from '../config.mjs';
 import { shellPage, formField } from '../shell.mjs';
 import { icon } from '../components.mjs';
 
-// El submit real (API → aviso a Paola) llega en la fase dinámica.
-// Mientras tanto el form arma un mensaje de WhatsApp con los campos.
 const formHtml = `
-<form class="shell-form" id="pedido-form" action="${`https://wa.me/${site.whatsapp}`}" method="get" target="_blank" rel="noopener">
-  <input type="hidden" name="text" id="pedido-wa-text" value="">
+<form class="shell-form" id="pedido-form">
   <div class="shell-form-grid">
     ${formField({ name: 'nombre', label: 'Tu nombre', placeholder: 'Ej. Camila' })}
     ${formField({ name: 'telefono', label: 'WhatsApp / teléfono', type: 'tel', placeholder: '+56 9 …' })}
@@ -40,26 +37,49 @@ const formHtml = `
       placeholder: 'Dirección, horario preferido, primera vez…',
     })}
   </div>
-  <p class="shell-form-note">Al enviar se abre WhatsApp con tu pedido armado para que Paola lo reciba. Más adelante: aviso automático + panel en el dashboard.</p>
-  <button class="btn btn-cta" type="submit">${icon('wa')}<span>Enviar pedido a Paola</span></button>
+  <p class="shell-form-note">Al enviar se guarda tu pedido y se abre WhatsApp para confirmarlo.</p>
+  <p class="shell-form-status" id="pedido-status" hidden role="status"></p>
+  <button class="btn btn-cta" type="submit" id="pedido-submit">${icon('wa')}<span>Enviar pedido</span></button>
 </form>
 <script>
 (function () {
   var form = document.getElementById('pedido-form');
+  var statusEl = document.getElementById('pedido-status');
+  var submitBtn = document.getElementById('pedido-submit');
   if (!form) return;
-  form.addEventListener('submit', function (e) {
+  form.addEventListener('submit', async function (e) {
     e.preventDefault();
     var fd = new FormData(form);
-    var lines = [
-      'Hola SanaVida / Paola, quiero hacer un pedido:',
-      '• Nombre: ' + (fd.get('nombre') || ''),
-      '• Teléfono: ' + (fd.get('telefono') || ''),
-      '• Comuna: ' + (fd.get('comuna') || ''),
-      '• Cantidad: ' + (fd.get('cantidad') || '') + ' botella(s)',
-      '• Entrega: ' + (fd.get('entrega') || ''),
-      '• Notas: ' + (fd.get('notas') || '—')
-    ];
-    window.open('https://wa.me/${site.whatsapp}?text=' + encodeURIComponent(lines.join('\\n')), '_blank', 'noopener');
+    var payload = {
+      nombre: fd.get('nombre') || '',
+      telefono: fd.get('telefono') || '',
+      comuna: fd.get('comuna') || '',
+      cantidad: fd.get('cantidad') || '',
+      entrega: fd.get('entrega') || '',
+      notas: fd.get('notas') || ''
+    };
+    submitBtn.disabled = true;
+    statusEl.hidden = false;
+    statusEl.classList.remove('is-error');
+    statusEl.textContent = 'Guardando pedido…';
+    try {
+      var res = await fetch('/api/pedido', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'No se pudo guardar');
+      statusEl.textContent = data.isReturning
+        ? ('Pedido N.º ' + data.orderNumber + ' registrado. Abriendo WhatsApp…')
+        : 'Pedido registrado. Abriendo WhatsApp…';
+      if (data.waUrl) window.open(data.waUrl, '_blank', 'noopener');
+    } catch (err) {
+      statusEl.classList.add('is-error');
+      statusEl.textContent = err.message || 'Error al guardar. Intenta de nuevo.';
+    } finally {
+      submitBtn.disabled = false;
+    }
   });
 })();
 </script>`;
@@ -68,12 +88,11 @@ export default shellPage({
   slug: 'pedido',
   nav: 'Pedir',
   tag: 'Pedido',
-  title: `Pedir kéfir artesanal | ${site.name}`,
-  description: `Formulario de pedido de kéfir SanaVida. Coordinamos entrega en ${site.city} y toda la ${site.regionShort}. Aviso directo a Paola.`,
+  title: `Pedir kéfir natural | ${site.name}`,
+  description: `Formulario de pedido de kéfir SanaVida. Coordinamos entrega en ${site.city} y toda la ${site.regionShort}.`,
   eyebrow: 'Pedidos',
-  h1: `Haz tu pedido y <em>Paola</em> te responde`,
-  lead: `Completa el formulario. Por ahora el aviso llega por WhatsApp; en la siguiente fase el mismo dato alimenta el dashboard de pedidos, pagos y entregas.`,
-  stubNote: 'Formulario listo. Falta API + notificación estructurada a Paola + sync con dashboard.',
+  h1: `Haz tu pedido y te <em>confirmamos</em>`,
+  lead: `Completa el formulario y te respondemos por WhatsApp para coordinar cantidad, día y entrega en la ${site.regionShort}.`,
   hideCta: true,
   actions: `<a class="btn btn-ghost" href="/pedido-kefir-iv-region/">Cómo funcionan las entregas</a>
     <a class="btn btn-ghost" href="/catalogo/">Ver catálogo</a>`,
@@ -90,7 +109,7 @@ export default shellPage({
       title: 'Qué pasa después',
       html: `<ol class="shell-steps">
         <li><strong>Tú envías el pedido</strong><span>Con comuna, cantidad y tipo de entrega.</span></li>
-        <li><strong>Paola confirma</strong><span>Disponibilidad, día y costo si aplica.</span></li>
+        <li><strong>Te confirmamos</strong><span>Disponibilidad, día y costo si aplica.</span></li>
         <li><strong>Preparamos y entregamos</strong><span>Kéfir fresco, refrigerado al llegar.</span></li>
       </ol>`,
     },

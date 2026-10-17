@@ -3,7 +3,7 @@ import { jarArt, delivery, faq, faqSchema, ctaBand, related, icon, trustBar, sci
 import { symptomsBlock, gutBrainBlock, realVsSuperBlock, pitchBenefits } from '../pitch.mjs';
 
 const faqs = [
-  { q: `¿Dónde comprar kéfir en la ${site.regionShort}?`, a: `SanaVida elabora kéfir artesanal en ${site.city} y reparte en toda la ${site.region}. En ${site.city} hay puntos fijos gratis cada semana (Atenas y Villa El Ingenio, Plaza de Armas, Santa Isabel salida sur) y delivery por ${clp(site.deliveryFee)}. En La Serena, Coquimbo y otras comunas coordinamos entregas cuando se juntan pedidos. Todo por WhatsApp o <a href="/pedido/">formulario de pedido</a>.` },
+  { q: `¿Dónde comprar kéfir en la ${site.regionShort}?`, a: `SanaVida elabora kéfir natural en ${site.city} y reparte en toda la ${site.region}. En ${site.city} hay puntos fijos gratis cada semana (Atenas y Villa El Ingenio, Plaza de Armas, Santa Isabel salida sur) y delivery por ${clp(site.deliveryFee)}. En La Serena, Coquimbo y otras comunas coordinamos entregas cuando se juntan pedidos. Todo por WhatsApp o <a href="/pedido/">formulario de pedido</a>.` },
   { q: '¿El kéfir puede ayudar con hinchazón, gases o pesadez?', a: 'Muchas personas lo usan justamente para eso: el cultivo vivo aporta bacterias buenas que pueden reequilibrar la digestión. Empieza con cucharadas. <a href="/kefir-beneficios-digestion/">Lee la guía de digestión</a>.' },
   { q: '¿Sirve si soy intolerante a la lactosa?', a: 'Aunque viene de la leche, la fermentación reduce buena parte de la lactosa. Por eso muchas personas con intolerancia leve lo toman sin problema. Si tu intolerancia es severa, parte con muy poca cantidad y consulta a tu médico.' },
   { q: '¿Qué diferencia hay con el kéfir del supermercado?', a: 'Las opciones industriales suelen pasar por procesos para durar meses en góndola, lo que debilita o elimina el cultivo vivo. El nuestro no se pasteuriza: llega fresco, con búlgaros vivos activos.' },
@@ -16,15 +16,15 @@ export default {
   slug: '',
   nav: 'Inicio',
   tag: 'Inicio',
-  title: `Kéfir artesanal vivo: digestión, ánimo y energía | SanaVida`,
-  description: `Kéfir real, 100% artesanal y sin pasteurizar. Ayuda a desinflamar, mejorar digestión, ánimo y descanso. Hecho en ${site.city}, con envío en la ${site.regionShort}.`,
+  title: `kéfir natural vivo: digestión, ánimo y energía | SanaVida`,
+  description: `Kéfir real, 100% natural y sin pasteurizar. Ayuda a desinflamar, mejorar digestión, ánimo y descanso. Hecho en ${site.city}, con envío en la ${site.regionShort}.`,
   render(pages) {
     const body = `
 <section class="hero">
   <div class="wrap hero-grid">
     <div class="hero-copy">
       <p class="eyebrow">Hecho a mano en ${site.city} · ${site.regionShort}</p>
-      <h1 class="display">Kéfir artesanal: bacterias buenas para <em>sentirte bien</em>.</h1>
+      <h1 class="display">kéfir natural: bacterias buenas para <em>sentirte bien</em>.</h1>
       <p class="lead">Literalmente, kéfir significa “sentirse bien”. Cultivo vivo que reprograma tu digestión, alivia hinchazón y gases, y mejora la comunicación entre tu intestino y tu cerebro — sueño, ánimo y energía. 100% natural, listo en botella, con envío a domicilio.</p>
       <div class="hero-actions">
         <a class="btn btn-wa" href="/pedido/">${icon('wa')}<span>Pedir hoy</span></a>
@@ -91,7 +91,7 @@ ${delivery()}
 ${related('', pages)}
 ${faq(faqs, 'Preguntas frecuentes sobre nuestro kéfir')}
 ${ctaBand(
-  'Prueba kéfir 100% natural y artesanal',
+  'Prueba kéfir 100% natural',
   'Haz tu pedido hoy con envío a domicilio en la IV Región. Cultivo vivo, sin pasar por la góndola.',
 )}`;
     return {
