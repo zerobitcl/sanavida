@@ -21,6 +21,7 @@ import politicas from './src/pages/politicas.mjs';
 import blog from './src/pages/blog.mjs';
 import cotizacion from './src/pages/cotizacion.mjs';
 import dashboard from './src/pages/dashboard.mjs';
+import oferta from './src/pages/oferta.mjs';
 
 const OUT = 'dist';
 const pages = [
@@ -31,6 +32,7 @@ const pages = [
   blog,
   cotizacion,
   dashboard,
+  oferta,
   pajaritos,
   digestion,
   vsYogurt,
@@ -63,6 +65,19 @@ await writeFile(join(OUT, cssFile), css);
 const withCss = (html) => html.replace('href="/styles.css"', `href="/${cssFile}"`);
 
 for (const page of pages) {
+  const dir = join(OUT, page.slug);
+  await mkdir(dir, { recursive: true });
+
+  // Landings autónomas (p. ej. ads): HTML completo sin shell del sitio.
+  if (page.standalone) {
+    const { html } = page.render(pages);
+    await writeFile(join(dir, 'index.html'), minHtml(html));
+    if (page.title.length > 65 || page.description.length > 160) {
+      console.warn(`⚠ SERP truncado en /${page.slug}: title ${page.title.length}, desc ${page.description.length}`);
+    }
+    continue;
+  }
+
   const { body, schema, ogType } = page.render(pages);
   const html = withCss(
     layout({
@@ -75,8 +90,6 @@ for (const page of pages) {
       noindex: Boolean(page.noindex),
     }),
   );
-  const dir = join(OUT, page.slug);
-  await mkdir(dir, { recursive: true });
   await writeFile(join(dir, 'index.html'), minHtml(html));
   if (page.title.length > 65 || page.description.length > 160) {
     console.warn(`⚠ SERP truncado en /${page.slug}: title ${page.title.length}, desc ${page.description.length}`);
