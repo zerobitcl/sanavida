@@ -334,7 +334,7 @@ tbody th { font-weight: 600; }
 
 /* Elaboradora */
 .maker-grid { display: grid; grid-template-columns: auto 1fr; gap: clamp(1.5rem, 4vw, 3.5rem); align-items: center; max-width: 960px; }
-.maker-photo { width: clamp(180px, 24vw, 280px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: calc(var(--r) * 1.4); box-shadow: var(--shadow); }
+.maker-photo { width: clamp(180px, 24vw, 280px); height: auto; aspect-ratio: 4 / 5; object-fit: cover; object-position: center top; border-radius: calc(var(--r) * 1.4); box-shadow: var(--shadow); }
 .maker-mono { display: grid; place-items: center; width: clamp(140px, 18vw, 200px); aspect-ratio: 1; border-radius: 50%; background: linear-gradient(140deg, var(--lilac), var(--rose)); font: 500 clamp(3.5rem, 7vw, 5rem)/1 var(--serif); color: #fff; }
 
 /* ——— Landing producto / Ads CRO ——— */

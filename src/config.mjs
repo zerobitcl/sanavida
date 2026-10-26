@@ -96,7 +96,7 @@ export const site = {
     processVideo: '/video/proceso.webm',
     processPoster: '/img/proceso-poster.webp',
     berries: '/img/batido-frutillas-arandanos.webp',
-    maker: '/img/pao.webp',
+    maker: '/img/pao.jpg',
   },
   logo: { src: '/img/brand/logo-240.png', large: '/img/brand/logo-480.png', w: 1179, h: 786 },
   claims: {
