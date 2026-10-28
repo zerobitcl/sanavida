@@ -16,9 +16,6 @@ const packs = {
 
 const gallery = [
   { src: '/img/oferta/carrusel-1.jpg', thumb: '/img/oferta/thumb-1.jpg', label: 'Botella', alt: 'Botella de kéfir SanaVida 1L con vaso servido' },
-  { src: '/img/oferta/carrusel-2.jpg', thumb: '/img/oferta/thumb-2.jpg', label: 'Beneficios', alt: 'Kéfir SanaVida: salud intestinal, digestión y menos hinchazón' },
-  { src: '/img/oferta/carrusel-3.jpg', thumb: '/img/oferta/thumb-3.jpg', label: 'Por qué', alt: 'Por qué elegir kéfir artesanal SanaVida' },
-  { src: '/img/oferta/carrusel-4.jpg', thumb: '/img/oferta/thumb-4.jpg', label: 'Desayuno', alt: 'Desayuno con kéfir SanaVida, granola y frutas' },
   { src: '/img/oferta/tabla-nutricional.jpg', thumb: '/img/oferta/thumb-tabla.jpg', label: 'Nutrición', alt: 'Tabla nutricional e ingredientes del kéfir SanaVida' },
   { src: '/img/oferta/paola-kefir.jpg', thumb: '/img/oferta/thumb-paola.jpg', label: 'Paola', alt: 'Paola con botella de kéfir artesanal SanaVida' },
 ];
@@ -255,19 +252,19 @@ export default {
   </div>
   <div class="benefits">
     <article class="benefit">
-      <div class="scene"><img src="/img/oferta/thumb-2.jpg" alt="" width="280" height="174" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/carrusel-2.jpg" alt="Beneficios del kéfir SanaVida para la digestión" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Menos hinchazón y molestias digestivas</h3><p>Cuida tu equilibrio intestinal y favorece una digestión más cómoda.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene"><img src="/img/brand/ico-bulgaros.png" alt="" width="56" height="56" loading="lazy" decoding="async" style="width:72px;height:72px;object-fit:contain"></div>
+      <div class="scene scene-icon"><img src="/img/brand/ico-bulgaros.png" alt="" width="72" height="72" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Mejora tu salud intestinal</h3><p>Incorpora microorganismos vivos del kéfir para complementar el cuidado de tu microbiota.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene"><img src="/img/oferta/thumb-4.jpg" alt="" width="280" height="174" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/carrusel-4.jpg" alt="Desayuno con kéfir SanaVida" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Cuida tu bienestar desde adentro</h3><p>Tu intestino y tu cerebro están conectados. Una alimentación saludable es parte de cómo te sientes.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene"><img src="/img/brand/ico-azucar.png" alt="" width="56" height="56" loading="lazy" decoding="async" style="width:72px;height:72px;object-fit:contain"></div>
+      <div class="scene"><img src="/img/oferta/carrusel-3.jpg" alt="Por qué elegir kéfir artesanal SanaVida" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Siéntete mejor en tu día a día</h3><p>Una alimentación equilibrada y una buena salud digestiva favorecen tu bienestar cotidiano.</p></div>
     </article>
   </div>
@@ -360,7 +357,7 @@ export default {
 <section class="ordersection" id="pedido">
   <div class="wrap ordergrid">
     <div class="orderintro">
-      <span class="eyebrow" style="color:#ff9fd0">PIDE EN POCOS PASOS</span>
+      <span class="eyebrow">PIDE EN POCOS PASOS</span>
       <h2>Empieza a cuidar tu salud intestinal hoy</h2>
       <p>Elige tu pack, completa tus datos y recibe tu kéfir artesanal a domicilio. Pagas al recibir.</p>
     </div>
