@@ -19,28 +19,30 @@ const gallery = [
   { src: '/img/oferta/carrusel-2.jpg', thumb: '/img/oferta/thumb-2.jpg', label: 'Beneficios', alt: 'Kéfir SanaVida: salud intestinal, digestión y menos hinchazón' },
   { src: '/img/oferta/carrusel-3.jpg', thumb: '/img/oferta/thumb-3.jpg', label: 'Por qué', alt: 'Por qué elegir kéfir artesanal SanaVida' },
   { src: '/img/oferta/carrusel-4.jpg', thumb: '/img/oferta/thumb-4.jpg', label: 'Desayuno', alt: 'Desayuno con kéfir SanaVida, granola y frutas' },
+  { src: '/img/oferta/tabla-nutricional.jpg', thumb: '/img/oferta/thumb-tabla.jpg', label: 'Nutrición', alt: 'Tabla nutricional e ingredientes del kéfir SanaVida' },
+  { src: '/img/oferta/paola-kefir.jpg', thumb: '/img/oferta/thumb-paola.jpg', label: 'Paola', alt: 'Paola con botella de kéfir artesanal SanaVida' },
 ];
 
 const reviews = [
   {
-    name: 'Yani',
-    role: 'Cliente feliz · Salud intestinal',
+    name: 'Carol',
+    role: 'Cliente · Salud intestinal',
     text: 'Es verdad, tenía siempre molestias digestivas con ciertos alimentos y desde que lo tomo mejoré muchísimo mi salud intestinal.',
-    photo: '/img/oferta/carrusel-1.jpg',
+    photo: '/img/oferta/review-carol.jpg',
     tag: 'Cliente + producto',
   },
   {
-    name: 'Fergie Sotelo',
-    role: 'Cliente feliz · Antojos y rutina',
+    name: 'Camila',
+    role: 'Cliente · Antojos y rutina',
     text: 'Empecé mi déficit calórico hace unas semanas y con el kéfir sin azúcar ya no sufro de antojos ni ansiedad en este proceso.',
-    photo: '/img/oferta/carrusel-2.jpg',
+    photo: '/img/oferta/review-camila.jpg',
     tag: 'Cliente + producto',
   },
   {
-    name: 'Ónix',
-    role: 'Cliente feliz · Bienestar cotidiano',
+    name: 'Valentina',
+    role: 'Cliente · Bienestar cotidiano',
     text: 'Yo voy tomando kéfir casi un año y de pronto ya no siento esa ansiedad ni ese bajón... más bien me siento tranquila.',
-    photo: '/img/oferta/carrusel-4.jpg',
+    photo: '/img/oferta/review-vale.jpg',
     tag: 'Cliente + producto',
   },
 ];
@@ -164,7 +166,7 @@ export default {
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#214b37">
+<meta name="theme-color" content="#4a2574">
 <title>${esc(this.title)}</title>
 <meta name="description" content="${esc(this.description)}">
 <link rel="canonical" href="${url}">
@@ -178,6 +180,9 @@ export default {
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/img/brand/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="/img/brand/apple-touch-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400..800&display=swap">
 <script type="application/ld+json">${JSON.stringify(schema)}</script>
 <style>${styles}</style>
 </head>
@@ -279,10 +284,10 @@ export default {
       <div class="compare featured">
         <h3>🌿 SanaVida</h3>
         <ul>
-          <li><span>✓</span> Kéfir natural, sin azúcar añadida*</li>
+          <li><span>✓</span> Kéfir natural, sin azúcar añadida</li>
           <li><span>✓</span> Elaborado con cultivos vivos de kéfir</li>
-          <li><span>✓</span> Sin aditivos innecesarios*</li>
-          <li><span>✓</span> Sin tratamiento térmico posterior a la fermentación*</li>
+          <li><span>✓</span> Sin aditivos</li>
+          <li><span>✓</span> Sin tratamiento térmico posterior a la fermentación</li>
         </ul>
       </div>
       <div class="compare">
@@ -295,7 +300,6 @@ export default {
         </ul>
       </div>
     </div>
-    <p class="compare-note">*Datos de composición y elaboración de SanaVida pendientes de confirmar con la ficha técnica. No todas las alternativas comerciales incluyen estos ingredientes o tratamientos.</p>
     <div style="text-align:center;margin-top:22px"><a href="#pedido" class="secondarycta">Quiero probar SanaVida →</a></div>
   </div>
 </section>
@@ -303,8 +307,8 @@ export default {
 <section class="section wrap">
   <div class="story">
     <div class="storyphoto">
-      <img src="/img/oferta/carrusel-4.jpg" alt="Persona disfrutando kéfir SanaVida en el desayuno" width="560" height="700" loading="lazy" decoding="async">
-      <div class="story-caption">Bienestar que<br>se siente<small>Kéfir SanaVida en tu desayuno</small></div>
+      <img src="/img/oferta/paola-kefir.jpg" alt="Paola con kéfir artesanal SanaVida" width="560" height="700" loading="lazy" decoding="async">
+      <div class="story-caption">Bienestar que<br>se siente<small>Kéfir SanaVida en tu rutina</small></div>
     </div>
     <div class="storytext">
       <span class="eyebrow">TU SALUD INTESTINAL IMPORTA</span>
@@ -356,7 +360,7 @@ export default {
 <section class="ordersection" id="pedido">
   <div class="wrap ordergrid">
     <div class="orderintro">
-      <span class="eyebrow" style="color:#c1d9bb">PIDE EN POCOS PASOS</span>
+      <span class="eyebrow" style="color:#ff9fd0">PIDE EN POCOS PASOS</span>
       <h2>Empieza a cuidar tu salud intestinal hoy</h2>
       <p>Elige tu pack, completa tus datos y recibe tu kéfir artesanal a domicilio. Pagas al recibir.</p>
     </div>
@@ -403,7 +407,7 @@ export default {
   </div>
 </footer>
 
-<div class="mobilebuy"><a href="#pedido"><span>QUIERO PEDIR MI KÉFIR</span><span id="stickyPrice">Desde ${clp(packs[1].price)} →</span></a></div>
+<div class="mobilebuy" id="stickyBuy"><a href="#pedido"><span>QUIERO PEDIR MI KÉFIR</span><span id="stickyPrice">Desde ${clp(packs[1].price)} →</span></a></div>
 
 <script>
 const offers={1:{qty:1,price:8000,save:0},2:{qty:2,price:14000,save:2000},3:{qty:3,price:20000,save:4000}};
@@ -455,6 +459,14 @@ if(reviewTrack){
   reviewDots.forEach((dot,i)=>dot.addEventListener('click',()=>reviewTrack.scrollTo({left:step()*i,behavior:'smooth'})));
   reviewTrack.addEventListener('scroll',()=>window.requestAnimationFrame(updateReviewDots));
   updateReviewDots();
+}
+
+const stickyBuy=$('stickyBuy');
+const pedido=$('pedido');
+if(stickyBuy&&pedido&&'IntersectionObserver' in window){
+  new IntersectionObserver(([entry])=>{
+    stickyBuy.classList.toggle('is-hidden',entry.isIntersecting);
+  },{threshold:0.12}).observe(pedido);
 }
 
 $('orderForm').addEventListener('submit',e=>{
