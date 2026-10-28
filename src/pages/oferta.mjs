@@ -6,18 +6,22 @@ import { site, clp, abs, pagePath } from '../config.mjs';
 // Landing de conversión (ads): HTML autónomo basado en SanaVida_Landing_V10.
 // No usa el layout del sitio para no mezclar nav/FAB con el embudo de packs.
 const __dir = dirname(fileURLToPath(import.meta.url));
-const styles = readFileSync(join(__dir, '../oferta-styles.css'), 'utf8');
+// Strip BOM: si el CSS empieza con U+FEFF, `:root` no matchea y todas las var() fallan.
+const styles = readFileSync(join(__dir, '../oferta-styles.css'), 'utf8').replace(/^\uFEFF/, '');
 
 const packs = {
-  1: { qty: 1, price: 8000, save: 0, label: '1 litro' },
-  2: { qty: 2, price: 14000, save: 2000, label: '2 litros' },
-  3: { qty: 3, price: 20000, save: 4000, label: '3 litros' },
+  1: { qty: 1, price: 7500, save: 0, label: '1 litro' },
+  2: { qty: 2, price: 12990, save: 2010, label: '2 litros' },
+  3: { qty: 3, price: 17990, save: 4510, label: '3 litros' },
 };
 
 const gallery = [
-  { src: '/img/oferta/carrusel-1.jpg', thumb: '/img/oferta/thumb-1.jpg', label: 'Botella', alt: 'Botella de kéfir SanaVida 1L con vaso servido' },
-  { src: '/img/oferta/tabla-nutricional.jpg', thumb: '/img/oferta/thumb-tabla.jpg', label: 'Nutrición', alt: 'Tabla nutricional e ingredientes del kéfir SanaVida' },
-  { src: '/img/oferta/paola-kefir.jpg', thumb: '/img/oferta/thumb-paola.jpg', label: 'Paola', alt: 'Paola con botella de kéfir artesanal SanaVida' },
+  { src: '/img/oferta/carrusel-1.jpg', thumb: '/img/oferta/thumb-1.jpg', label: '1', alt: 'Kéfir SanaVida — foto 1' },
+  { src: '/img/oferta/carrusel-2.jpg', thumb: '/img/oferta/thumb-2.jpg', label: '2', alt: 'Kéfir SanaVida — foto 2' },
+  { src: '/img/oferta/carrusel-3.jpg', thumb: '/img/oferta/thumb-3.jpg', label: '3', alt: 'Kéfir SanaVida — foto 3' },
+  { src: '/img/oferta/carrusel-4.jpg', thumb: '/img/oferta/thumb-4.jpg', label: '4', alt: 'Kéfir SanaVida — foto 4' },
+  { src: '/img/oferta/carrusel-5.jpg', thumb: '/img/oferta/thumb-5.jpg', label: '5', alt: 'Kéfir SanaVida — foto 5' },
+  { src: '/img/oferta/carrusel-6.jpg', thumb: '/img/oferta/thumb-6.jpg', label: '6', alt: 'Kéfir SanaVida — foto 6' },
 ];
 
 const reviews = [
@@ -25,22 +29,19 @@ const reviews = [
     name: 'Carol',
     role: 'Cliente · Salud intestinal',
     text: 'Es verdad, tenía siempre molestias digestivas con ciertos alimentos y desde que lo tomo mejoré muchísimo mi salud intestinal.',
-    photo: '/img/oferta/review-carol.jpg',
-    tag: 'Cliente + producto',
+    photo: '/img/oferta/review-carol.jpg?v=2',
   },
   {
     name: 'Camila',
     role: 'Cliente · Antojos y rutina',
     text: 'Empecé mi déficit calórico hace unas semanas y con el kéfir sin azúcar ya no sufro de antojos ni ansiedad en este proceso.',
-    photo: '/img/oferta/review-camila.jpg',
-    tag: 'Cliente + producto',
+    photo: '/img/oferta/review-camila.jpg?v=2',
   },
   {
     name: 'Valentina',
     role: 'Cliente · Bienestar cotidiano',
     text: 'Yo voy tomando kéfir casi un año y de pronto ya no siento esa ansiedad ni ese bajón... más bien me siento tranquila.',
-    photo: '/img/oferta/review-vale.jpg',
-    tag: 'Cliente + producto',
+    photo: '/img/oferta/review-vale.jpg?v=2',
   },
 ];
 
@@ -98,9 +99,8 @@ export default {
 
     const thumbs = gallery
       .map(
-        (g, i) => `<button type="button" class="thumb${i === 0 ? ' active' : ''}" data-slide="${i}" aria-label="${esc(g.label)}">
+        (g, i) => `<button type="button" class="thumb${i === 0 ? ' active' : ''}" data-slide="${i}" aria-label="Ver foto ${esc(g.label)}">
   <img src="${g.thumb}" alt="" width="160" height="94" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
-  <span>${esc(g.label)}</span>
 </button>`,
       )
       .join('');
@@ -109,8 +109,7 @@ export default {
       .map(
         (r, i) => `<article class="reviewslide">
   <div class="reviewphoto photo${i + 1}">
-    <img class="review-bg" src="${r.photo}" alt="" width="480" height="285" loading="lazy" decoding="async">
-    <span class="phototag">${esc(r.tag)}</span>
+    <img class="review-bg" src="${r.photo}" alt="" width="480" height="480" loading="lazy" decoding="async">
   </div>
   <div class="reviewcontent">
     <div class="reviewhead">
@@ -198,7 +197,6 @@ export default {
     <div class="picture" id="mainPicture">
       <span class="mark">NATURAL · ARTESANAL</span>
       <img class="hero-shot" id="heroShot" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="720" height="550" fetchpriority="high" decoding="async">
-      <span class="picdesc" id="picDesc">${esc(gallery[0].alt)}</span>
     </div>
     <div class="thumbs" aria-label="Galería de fotografías">${thumbs}</div>
   </div>
@@ -223,10 +221,10 @@ export default {
     <div class="offerhead"><strong>Elige tu pack y ahorra</strong><span>Botellas de 1 litro</span></div>
     <div id="topPacks">
       <label class="pack"><input type="radio" name="topPack" value="1"><span class="pack-main"><strong>1 litro</strong><small>Para probar SanaVida</small></span><span class="pack-price">${clp(packs[1].price)}</span></label>
-      <label class="pack"><input type="radio" name="topPack" value="2" checked><span class="pack-main"><strong>2 litros <span class="pack-badge">POPULAR</span></strong><small>Ahorras ${clp(packs[2].save)}</small></span><span class="pack-price"><del>${clp(16000)}</del>${clp(packs[2].price)}</span></label>
-      <label class="pack"><input type="radio" name="topPack" value="3"><span class="pack-main"><strong>3 litros <span class="pack-badge">MAYOR AHORRO</span></strong><small>Ahorras ${clp(packs[3].save)}</small></span><span class="pack-price"><del>${clp(24000)}</del>${clp(packs[3].price)}</span></label>
+      <label class="pack"><input type="radio" name="topPack" value="2" checked><span class="pack-main"><strong>2 litros <span class="pack-badge">POPULAR</span></strong><small>Ahorras ${clp(packs[2].save)}</small></span><span class="pack-price"><del>${clp(packs[1].price * 2)}</del>${clp(packs[2].price)}</span></label>
+      <label class="pack"><input type="radio" name="topPack" value="3"><span class="pack-main"><strong>3 litros <span class="pack-badge">MAYOR AHORRO</span></strong><small>Ahorras ${clp(packs[3].save)}</small></span><span class="pack-price"><del>${clp(packs[1].price * 3)}</del>${clp(packs[3].price)}</span></label>
     </div>
-    <a href="#pedido" class="cta hero-cta">QUIERO PEDIR MI KÉFIR <span aria-hidden="true">→</span></a>
+    <a href="#pedido" class="cta hero-cta" style="background:#d81b60;color:#fff">QUIERO PEDIR MI KÉFIR <span aria-hidden="true">→</span></a>
     <div class="checkout-trust" aria-label="Información del pedido">
       <span><i aria-hidden="true">✓</i> Paga al recibir</span>
       <span class="trust-divider" aria-hidden="true"></span>
@@ -252,19 +250,19 @@ export default {
   </div>
   <div class="benefits">
     <article class="benefit">
-      <div class="scene"><img src="/img/oferta/carrusel-2.jpg" alt="Beneficios del kéfir SanaVida para la digestión" width="480" height="300" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/benefit-hinchazon.jpg" alt="Menos hinchazón y molestias digestivas" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Menos hinchazón y molestias digestivas</h3><p>Cuida tu equilibrio intestinal y favorece una digestión más cómoda.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene scene-icon"><img src="/img/brand/ico-bulgaros.png" alt="" width="72" height="72" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/benefit-intestinal.jpg" alt="Mejora tu salud intestinal" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Mejora tu salud intestinal</h3><p>Incorpora microorganismos vivos del kéfir para complementar el cuidado de tu microbiota.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene"><img src="/img/oferta/carrusel-4.jpg" alt="Desayuno con kéfir SanaVida" width="480" height="300" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/benefit-bienestar.jpg" alt="Cuida tu bienestar desde adentro" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Cuida tu bienestar desde adentro</h3><p>Tu intestino y tu cerebro están conectados. Una alimentación saludable es parte de cómo te sientes.</p></div>
     </article>
     <article class="benefit">
-      <div class="scene"><img src="/img/oferta/carrusel-3.jpg" alt="Por qué elegir kéfir artesanal SanaVida" width="480" height="300" loading="lazy" decoding="async"></div>
+      <div class="scene"><img src="/img/oferta/benefit-diadia.jpg" alt="Siéntete mejor en tu día a día" width="480" height="300" loading="lazy" decoding="async"></div>
       <div class="body"><h3>Siéntete mejor en tu día a día</h3><p>Una alimentación equilibrada y una buena salud digestiva favorecen tu bienestar cotidiano.</p></div>
     </article>
   </div>
@@ -386,7 +384,7 @@ export default {
           <div class="field wide"><label for="customerNotes">Indicaciones de entrega (opcional)</label><textarea id="customerNotes" placeholder="Edificio, referencia, horario..."></textarea></div>
         </div>
         <label class="privacy"><input id="privacyCheck" type="checkbox" required> Autorizo el uso de mis datos exclusivamente para gestionar mi solicitud de pedido. <a href="/politicas/">Ver políticas</a>.</label>
-        <button class="cta" type="submit">CONFIRMAR Y CONTINUAR A WHATSAPP →</button>
+        <button class="cta" type="submit" style="background:#d81b60;color:#fff;border:0">CONFIRMAR Y CONTINUAR A WHATSAPP →</button>
         <p class="fine">No se realiza ningún pago en esta página.</p>
         <div id="formStatus" role="status" class="status" hidden></div>
       </form>
@@ -404,10 +402,10 @@ export default {
   </div>
 </footer>
 
-<div class="mobilebuy" id="stickyBuy"><a href="#pedido"><span>QUIERO PEDIR MI KÉFIR</span><span id="stickyPrice">Desde ${clp(packs[1].price)} →</span></a></div>
+<div class="mobilebuy" id="stickyBuy"><a href="#pedido" style="background:#d81b60;color:#fff"><span>QUIERO PEDIR MI KÉFIR</span><span id="stickyPrice">Desde ${clp(packs[1].price)} →</span></a></div>
 
 <script>
-const offers={1:{qty:1,price:8000,save:0},2:{qty:2,price:14000,save:2000},3:{qty:3,price:20000,save:4000}};
+const offers={1:{qty:1,price:7500,save:0},2:{qty:2,price:12990,save:2010},3:{qty:3,price:17990,save:4510}};
 const deliveryFee=${site.deliveryFee};
 const waNumber=${JSON.stringify(waNumber)};
 const gallery=${JSON.stringify(gallery.map((g) => ({ src: g.src, alt: g.alt })))};
@@ -435,7 +433,6 @@ document.querySelectorAll('[data-slide]').forEach(el=>el.addEventListener('click
   const shot=$('heroShot');
   shot.src=scene.src;
   shot.alt=scene.alt;
-  $('picDesc').textContent=scene.alt;
 }));
 
 const reviewTrack=$('reviewTrack');

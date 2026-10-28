@@ -29,7 +29,7 @@ if (!is_file($cfgFile)) {
 }
 $cfg = require $cfgFile;
 $key = $cfg['api2pdf_key'] ?? '';
-$unit = isset($cfg['unit_price']) ? (int) $cfg['unit_price'] : 8000;
+$unit = isset($cfg['unit_price']) ? (int) $cfg['unit_price'] : 7500;
 $wa = preg_replace('/\D+/', '', (string) ($cfg['whatsapp'] ?? '56900000000'));
 
 $raw = file_get_contents('php://input');

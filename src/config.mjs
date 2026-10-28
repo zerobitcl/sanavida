@@ -49,7 +49,7 @@ export const site = {
     servings: 5,
     servingMl: 200,
     // price en CLP. null = Product schema sin offers (Google no muestra rich result de precio).
-    price: 8000,
+    price: 7500,
     ingredients: ['Leche entera', 'Búlgaros vivos'],
     conservation: 'Mantener refrigerado entre 4° y 8°C. Agitar antes de consumir.',
     seals: [

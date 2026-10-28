@@ -77,7 +77,7 @@ function sv_migrate(PDO $pdo): void {
     tipo VARCHAR(40) NOT NULL DEFAULT '',
     cantidad VARCHAR(80) NOT NULL DEFAULT '',
     detalle TEXT NULL,
-    unit_price INT UNSIGNED NOT NULL DEFAULT 8000,
+    unit_price INT UNSIGNED NOT NULL DEFAULT 7500,
     pdf_url TEXT NULL,
     quote_number INT UNSIGNED NOT NULL DEFAULT 1,
     created_at DATETIME NOT NULL,

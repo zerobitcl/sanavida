@@ -2,7 +2,7 @@
 // Copia como config.local.php (no subir a git).
 return [
   'api2pdf_key' => 'TU-API-KEY',
-  'unit_price' => 8000,
+  'unit_price' => 7500,
   'whatsapp' => '56900000000',
   'db' => [
     'host' => '127.0.0.1',
