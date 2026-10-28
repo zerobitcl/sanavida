@@ -89,7 +89,7 @@ a{color:inherit}
 .benefits{display:grid;grid-template-columns:repeat(4,1fr);gap:15px}
 .benefit{background:white;border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:var(--shadow)}
 .benefit .scene{height:190px;display:grid;place-items:center;background:linear-gradient(145deg,var(--lilac-50),var(--lilac-2));padding:0;overflow:hidden}
-.benefit .scene img{width:100%;height:100%;object-fit:cover;object-position:center;display:block}
+.benefit .scene img{width:100%;height:100%;object-fit:contain;object-position:center;display:block}
 .benefit .body{padding:19px}
 .benefit h3{margin:0 0 7px;font-size:16px}
 .benefit p{margin:0;color:var(--muted);font-size:13px;line-height:1.6}
@@ -133,10 +133,18 @@ a{color:inherit}
 .reviewdots{display:flex;justify-content:center;gap:8px;margin-top:15px}
 .reviewdots button{width:8px;height:8px;border-radius:999px;border:0;background:#dcc4da;padding:0}
 .reviewdots button.active{width:26px;background:#d81b60}
-.credential{border:1px solid #d7aed4;background:var(--lilac-50);border-radius:22px;display:flex;gap:22px;align-items:center;padding:30px}
-.credential .maker-face{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:3px solid #fff;box-shadow:0 8px 18px rgba(74,37,116,.18)}
+.credential{border:1px solid #d7aed4;background:var(--lilac-50);border-radius:22px;display:flex;gap:22px;align-items:flex-start;padding:30px}
+.credential .maker-face{width:88px;height:88px;border-radius:50%;object-fit:cover;object-position:center top;flex-shrink:0;border:3px solid #fff;box-shadow:0 8px 18px rgba(74,37,116,.18);margin-top:4px}
+.credential-body{min-width:0;flex:1}
 .credential h3{margin:0 0 6px;font-size:22px;font-family:var(--serif);color:var(--plum)}
 .credential p{margin:0;color:var(--muted);line-height:1.6;font-size:14px}
+.seremi-badge{margin-top:16px;display:flex;align-items:center;gap:14px;padding:12px 14px;background:#fff;border:1px solid #e2c9df;border-radius:14px;box-shadow:0 4px 14px rgba(74,37,116,.06)}
+.seremi-logo{width:120px;height:auto;flex-shrink:0;display:block;border-radius:6px}
+.seremi-meta{display:flex;flex-direction:column;gap:2px;min-width:0}
+.seremi-meta strong{font-size:13px;color:var(--plum);letter-spacing:.01em}
+.seremi-meta span{font-size:12px;color:var(--muted);line-height:1.35}
+.seremi-meta a{font-size:12px;font-weight:750;color:#d81b60;text-decoration:none;margin-top:2px}
+.seremi-meta a:hover{text-decoration:underline}
 .faq{max-width:840px}
 .faq details{background:#fff;border:1px solid var(--line);border-radius:13px;margin:10px 0;padding:18px 22px}
 .faq summary{font-weight:750;cursor:pointer;font-size:15px}
@@ -224,6 +232,8 @@ a{color:inherit}
   .paylater{padding:11px 12px}
   .paylater .icon{width:30px;height:30px;font-size:14px}
   .credential{padding:19px;flex-direction:column;align-items:flex-start}
+  .seremi-badge{flex-direction:column;align-items:flex-start;gap:10px}
+  .seremi-logo{width:108px}
   .ordersection{padding:51px 0}
   .ordergrid{display:flex;flex-direction:column;gap:24px}
   .orderintro h2{font-size:35px}

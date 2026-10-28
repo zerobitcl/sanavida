@@ -337,9 +337,19 @@ export default {
 <section class="section wrap">
   <div class="credential">
     <img class="maker-face" src="/img/oferta/pao-web.jpg" alt="${esc(site.maker.name)}" width="88" height="88" loading="lazy" decoding="async">
-    <div>
+    <div class="credential-body">
       <h3>Elaboración con resolución sanitaria</h3>
       <p>En SanaVida nos preocupamos de elaborar un producto bajo las condiciones sanitarias autorizadas (Res. Exenta N.º ${esc(seremi.resolution)}, ${esc(seremi.authority)}), para que puedas comprar con mayor confianza. Elaborado por ${esc(site.maker.name)} en ${site.city}.</p>
+      <aside class="seremi-badge" aria-label="Resolución sanitaria SEREMI">
+        <img class="seremi-logo" src="/img/oferta/seremi-logo.png" alt="Logo SEREMI de Salud Región de Coquimbo" width="120" height="56" loading="lazy" decoding="async">
+        <div class="seremi-meta">
+          <strong>Res. Exenta N.º ${esc(seremi.resolution)}</strong>
+          <span>${esc(seremi.authority)}</span>
+          <span>Código trámite: ${esc(seremi.resolution)}</span>
+          <span>Código validación: ${esc(seremi.validationCode)}</span>
+          <a href="${esc(seremi.validationUrl)}" target="_blank" rel="noopener noreferrer">Abrir verificador oficial ↗</a>
+        </div>
+      </aside>
     </div>
   </div>
 </section>

@@ -36,7 +36,7 @@ export const site = {
       resolution: '2604496921',
       date: '30/09/2026',
       validationCode: 'DQ2GD5',
-      validationUrl: 'https://seremienlinea.minsal.cl',
+      validationUrl: 'https://seremienlinea.minsal.cl/asdigital/index.php?resolucion',
     },
   },
   product: {
