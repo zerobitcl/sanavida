@@ -505,9 +505,10 @@ if(stickyBuy&&pedido&&'IntersectionObserver' in window){
   },{threshold:0.12}).observe(pedido);
 }
 
-$('orderForm').addEventListener('submit',e=>{
+$('orderForm').addEventListener('submit',async e=>{
   e.preventDefault();
   if(!e.target.reportValidity()) return;
+  const btn=e.target.querySelector('button[type="submit"]');
   const name=$('customerName').value.trim();
   const phone=$('customerPhone').value.trim();
   const city=$('customerCity').value.trim();
@@ -515,22 +516,56 @@ $('orderForm').addEventListener('submit',e=>{
   const notes=$('customerNotes').value.trim();
   const o=offers[selection];
   const total=o.price+deliveryFee;
+  const noteParts=[
+    'Fuente: oferta',
+    'Pack: '+o.qty+'L · '+clp(o.price)+' · Total est. '+clp(total),
+    'Dirección: '+address,
+  ];
+  if(notes) noteParts.push('Indicaciones: '+notes);
   const message='Hola, soy '+name+'. Quiero solicitar '+o.qty+' litro(s) de kéfir SanaVida.\\nPack: '+clp(o.price)+'\\nAhorro: '+clp(o.save)+'\\nReparto de referencia: '+clp(deliveryFee)+'\\nTotal estimado: '+clp(total)+'\\nWhatsApp: '+phone+'\\nComuna: '+city+'\\nDirección: '+address+(notes?'\\nIndicaciones: '+notes:'')+'\\n¿Podemos coordinar mi pedido?';
+  const status=$('formStatus');
+  status.hidden=false;
+  status.textContent='Guardando pedido…';
+  if(btn) btn.disabled=true;
+  let saved=false;
+  let waUrl='';
+  try{
+    const res=await fetch('/api/pedido',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        nombre:name,
+        telefono:phone,
+        comuna:city,
+        cantidad:String(o.qty),
+        entrega:'domicilio',
+        notas:noteParts.join(' · ')
+      })
+    });
+    const data=await res.json();
+    if(!res.ok||!data.ok) throw new Error(data.error||'No se pudo guardar');
+    saved=true;
+    waUrl=data.waUrl||'';
+  }catch(err){
+    status.textContent='No se pudo guardar en el panel. Igual puedes continuar por WhatsApp.';
+  }
   if(typeof fbq==='function'){
     fbq('track','Lead',{content_name:'Pedido kéfir oferta',content_category:'kéfir',value:total,currency:'CLP'});
     fbq('track','Purchase',{content_name:'Pedido kéfir oferta',content_type:'product',contents:[{id:'pack-'+o.qty+'L',quantity:1,item_price:o.price}],value:total,currency:'CLP',num_items:o.qty});
   }
-  const status=$('formStatus');
-  status.hidden=false;
-  if(waNumber){
-    window.open('https://wa.me/'+waNumber+'?text='+encodeURIComponent(message),'_blank','noopener');
-    status.textContent='Se abrió WhatsApp para coordinar tu pedido.';
+  const openUrl=waUrl||(waNumber?'https://wa.me/'+waNumber+'?text='+encodeURIComponent(message):'');
+  if(openUrl){
+    window.open(openUrl,'_blank','noopener');
+    status.textContent=saved
+      ?'Pedido registrado. Se abrió WhatsApp para coordinar.'
+      :'Se abrió WhatsApp para coordinar tu pedido.';
   }else{
     status.textContent='Modo demostración: falta configurar el WhatsApp oficial. Copiamos un resumen al portapapeles.';
     if(navigator.clipboard&&window.isSecureContext){
       navigator.clipboard.writeText(message).catch(()=>{});
     }
   }
+  if(btn) btn.disabled=false;
 });
 </script>
 </body>
