@@ -1,8 +1,9 @@
 import { site } from '../config.mjs';
 import { shellPage } from '../shell.mjs';
 import { icon } from '../components.mjs';
+import { opsGateHtml } from '../ops-gate.mjs';
 
-const dashHtml = `
+const dashInner = `
 <div class="dash" id="dash-root">
   <div class="dash-tools hero-actions" style="margin-bottom:1.5rem">
     <a class="btn btn-cta" href="/cotizacion/">Cotizador PDF</a>
@@ -11,7 +12,7 @@ const dashHtml = `
   <p class="shell-form-status" id="dash-status" hidden role="status"></p>
   <div class="dash-kpis" id="dash-kpis">
     <div class="dash-kpi"><span>Pedidos hoy</span><strong>—</strong></div>
-    <div class="dash-kpi"><span>Pedidos totales</span><strong>—</strong></div>
+    <div class="dash-kpi"><span>Pendientes</span><strong>—</strong></div>
     <div class="dash-kpi"><span>Cotizaciones</span><strong>—</strong></div>
     <div class="dash-kpi"><span>Clientes</span><strong>—</strong></div>
   </div>
@@ -20,7 +21,7 @@ const dashHtml = `
       <h3 id="dash-pedidos">Historial de pedidos</h3>
       <div class="dash-table-wrap">
         <table class="dash-table">
-          <thead><tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Comuna</th><th>Cant.</th><th>N.º</th></tr></thead>
+          <thead><tr><th>Fecha</th><th>Cliente</th><th>Teléfono</th><th>Comuna</th><th>Cant.</th><th>Estado</th></tr></thead>
           <tbody id="dash-orders"><tr><td colspan="6">Cargando…</td></tr></tbody>
         </table>
       </div>
@@ -47,6 +48,16 @@ const dashHtml = `
 </div>
 <script>
 (function () {
+  var STATUS_LABELS = {
+    nuevo: 'Nuevo',
+    confirmado: 'Confirmado',
+    preparando: 'Preparando',
+    en_camino: 'En camino',
+    entregado: 'Pedido entregado',
+    cancelado: 'Cancelado'
+  };
+  var STATUS_ORDER = ['nuevo','confirmado','preparando','en_camino','entregado','cancelado'];
+
   function esc(s) {
     return String(s == null ? '' : s)
       .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -63,19 +74,54 @@ const dashHtml = `
     if (n === 1) return '1º';
     return n + 'º';
   }
+  function statusSelect(orderId, current) {
+    var cur = STATUS_ORDER.indexOf(current) >= 0 ? current : 'nuevo';
+    var opts = STATUS_ORDER.map(function (s) {
+      return '<option value="' + s + '"' + (s === cur ? ' selected' : '') + '>' + esc(STATUS_LABELS[s] || s) + '</option>';
+    }).join('');
+    return '<select class="dash-status" data-order-id="' + esc(orderId) + '" aria-label="Estado del pedido">' + opts + '</select>';
+  }
+
+  async function setStatus(orderId, status, selectEl) {
+    var statusEl = document.getElementById('dash-status');
+    statusEl.hidden = false;
+    statusEl.classList.remove('is-error');
+    statusEl.textContent = 'Guardando estado…';
+    try {
+      var res = await fetch('/api/dashboard', {
+        method: 'POST',
+        headers: window.svOpsHeaders(),
+        body: JSON.stringify({ action: 'set_status', orderId: Number(orderId), status: status })
+      });
+      var data = await res.json();
+      if (!res.ok || !data.ok) throw new Error(data.error || 'No se pudo guardar');
+      if (selectEl) selectEl.setAttribute('data-prev', status);
+      statusEl.textContent = 'Estado actualizado.';
+      setTimeout(function () { statusEl.hidden = true; }, 1200);
+      load();
+    } catch (err) {
+      statusEl.classList.add('is-error');
+      statusEl.textContent = err.message || 'Error al guardar estado.';
+      if (selectEl && selectEl.getAttribute('data-prev')) selectEl.value = selectEl.getAttribute('data-prev');
+    }
+  }
+
   async function load() {
     var status = document.getElementById('dash-status');
     status.hidden = false;
     status.classList.remove('is-error');
     status.textContent = 'Actualizando…';
     try {
-      var res = await fetch('/api/dashboard', { cache: 'no-store' });
+      var res = await fetch('/api/dashboard', {
+        cache: 'no-store',
+        headers: { 'X-Ops-Pin': window.svOpsPin ? window.svOpsPin() : '' }
+      });
       var data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || 'Error al cargar');
       var k = data.kpis || {};
       document.getElementById('dash-kpis').innerHTML =
         '<div class="dash-kpi"><span>Pedidos hoy</span><strong>' + (k.orders_today || 0) + '</strong></div>' +
-        '<div class="dash-kpi"><span>Pedidos totales</span><strong>' + (k.orders || 0) + '</strong></div>' +
+        '<div class="dash-kpi"><span>Pendientes</span><strong>' + (k.orders_open != null ? k.orders_open : (k.orders || 0)) + '</strong></div>' +
         '<div class="dash-kpi"><span>Cotizaciones</span><strong>' + (k.quotes || 0) + '</strong></div>' +
         '<div class="dash-kpi"><span>Clientes</span><strong>' + (k.clients || 0) + '</strong></div>';
 
@@ -85,9 +131,16 @@ const dashHtml = `
             var badge = o.order_number > 1
               ? ' <span class="dash-pill">' + ordLabel(o.order_number) + ' pedido</span>'
               : '';
-            return '<tr><td>' + fmt(o.created_at) + '</td><td>' + esc(o.name) + badge + '</td><td>' + esc(o.phone) + '</td><td>' + esc(o.comuna) + '</td><td>' + esc(o.cantidad) + '</td><td>' + esc(o.order_number) + '</td></tr>';
+            return '<tr><td>' + fmt(o.created_at) + '</td><td>' + esc(o.name) + badge + '</td><td>' + esc(o.phone) + '</td><td>' + esc(o.comuna) + '</td><td>' + esc(o.cantidad) + '</td><td>' + statusSelect(o.id, o.status || 'nuevo') + '</td></tr>';
           }).join('')
         : '<tr><td colspan="6">Aún no hay pedidos guardados.</td></tr>';
+
+      document.querySelectorAll('.dash-status').forEach(function (sel) {
+        sel.setAttribute('data-prev', sel.value);
+        sel.addEventListener('change', function () {
+          setStatus(sel.getAttribute('data-order-id'), sel.value, sel);
+        });
+      });
 
       var quotes = data.quotes || [];
       document.getElementById('dash-quotes-body').innerHTML = quotes.length
@@ -119,11 +172,19 @@ const dashHtml = `
       document.getElementById('dash-clients-body').innerHTML = '<tr><td colspan="5">Error al cargar.</td></tr>';
     }
   }
-  var btn = document.getElementById('dash-refresh');
-  if (btn) btn.addEventListener('click', load);
-  load();
+
+  function boot() {
+    var btn = document.getElementById('dash-refresh');
+    if (btn) btn.addEventListener('click', load);
+    load();
+  }
+
+  if (document.getElementById('ops-app') && !document.getElementById('ops-app').hidden) boot();
+  else document.addEventListener('sv-ops-ready', boot, { once: true });
 })();
 </script>`;
+
+const dashHtml = opsGateHtml(dashInner);
 
 export default {
   ...shellPage({

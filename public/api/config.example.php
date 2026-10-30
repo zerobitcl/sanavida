@@ -3,7 +3,8 @@
 return [
   'api2pdf_key' => 'TU-API-KEY',
   'unit_price' => 7500,
-  'whatsapp' => '56900000000',
+  'whatsapp' => '56979848821',
+  'ops_pin' => '8210',
   'db' => [
     'host' => '127.0.0.1',
     'port' => 3306,

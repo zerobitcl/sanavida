@@ -1,9 +1,10 @@
 import { site } from '../config.mjs';
 import { shellPage, formField } from '../shell.mjs';
 import { icon } from '../components.mjs';
+import { opsGateHtml } from '../ops-gate.mjs';
 
 // Herramienta INTERNA para Paola: genera PDF de pedidos grandes y lo manda al cliente.
-const formHtml = `
+const formInner = `
 <form class="shell-form" id="cotizacion-form">
   <div class="shell-form-grid">
     ${formField({ name: 'empresa', label: 'Nombre del cliente / empresa', placeholder: 'Ej. Café Local, feria, oficina' })}
@@ -77,8 +78,8 @@ const formHtml = `
     try {
       var res = await fetch('/api/cotizacion', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        headers: window.svOpsHeaders ? window.svOpsHeaders() : { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.assign(payload, { opsPin: window.svOpsPin ? window.svOpsPin() : '' }))
       });
       var data = await res.json();
       if (!res.ok || !data.ok) throw new Error(data.error || 'Error al generar PDF');
@@ -96,6 +97,8 @@ const formHtml = `
   });
 })();
 </script>`;
+
+const formHtml = opsGateHtml(formInner);
 
 export default {
   ...shellPage({

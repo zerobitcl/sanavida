@@ -61,9 +61,11 @@ function sv_migrate(PDO $pdo): void {
     entrega VARCHAR(80) NOT NULL DEFAULT '',
     notas TEXT NULL,
     order_number INT UNSIGNED NOT NULL DEFAULT 1,
+    status VARCHAR(32) NOT NULL DEFAULT 'nuevo',
     created_at DATETIME NOT NULL,
     KEY idx_client (client_id),
     KEY idx_created (created_at),
+    KEY idx_status (status),
     CONSTRAINT fk_orders_client FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
 
@@ -85,6 +87,32 @@ function sv_migrate(PDO $pdo): void {
     KEY idx_created (created_at),
     CONSTRAINT fk_quotes_client FOREIGN KEY (client_id) REFERENCES clients(id) ON DELETE CASCADE
   ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci");
+
+  // Pedidos antiguos: agregar columna de estado si falta.
+  $hasStatus = $pdo->query("SHOW COLUMNS FROM orders LIKE 'status'")->fetch();
+  if (!$hasStatus) {
+    $pdo->exec("ALTER TABLE orders ADD COLUMN status VARCHAR(32) NOT NULL DEFAULT 'nuevo' AFTER order_number, ADD KEY idx_status (status)");
+  }
+}
+
+/** Estados válidos del panel de pedidos. */
+function sv_order_statuses(): array {
+  return ['nuevo', 'confirmado', 'preparando', 'en_camino', 'entregado', 'cancelado'];
+}
+
+/** Valida la clave interna (cotizador / dashboard). */
+function sv_require_ops(?array $input = null): void {
+  $cfg = sv_cfg();
+  $expected = (string) ($cfg['ops_pin'] ?? '8210');
+  $got = '';
+  if (!empty($_SERVER['HTTP_X_OPS_PIN'])) {
+    $got = (string) $_SERVER['HTTP_X_OPS_PIN'];
+  } elseif (is_array($input) && isset($input['opsPin'])) {
+    $got = (string) $input['opsPin'];
+  }
+  if ($expected === '' || !hash_equals($expected, $got)) {
+    sv_json(['ok' => false, 'error' => 'Clave incorrecta o faltante'], 401);
+  }
 }
 
 /** Normaliza teléfono Chile → 569XXXXXXXX cuando se puede. */

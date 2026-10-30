@@ -10,7 +10,7 @@ header('Cache-Control: no-store');
 
 if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
   header('Access-Control-Allow-Methods: POST, OPTIONS');
-  header('Access-Control-Allow-Headers: Content-Type');
+  header('Access-Control-Allow-Headers: Content-Type, X-Ops-Pin');
   http_response_code(204);
   exit;
 }
@@ -39,6 +39,9 @@ if (!is_array($input)) {
   echo json_encode(['ok' => false, 'error' => 'JSON inválido']);
   exit;
 }
+
+// Herramienta interna: exige la misma clave del dashboard.
+sv_require_ops($input);
 
 $empresa = trim((string) ($input['empresa'] ?? ''));
 $email = trim((string) ($input['email'] ?? ''));

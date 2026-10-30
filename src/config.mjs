@@ -6,13 +6,13 @@ export const site = {
   brandDisplay: 'SANAVIDA',
   tagline: 'Alimenta hoy tu bienestar de mañana',
   pillars: ['Natural', 'Nutritivo', 'Consciente'],
-  // Vacío = modo portable (dominio temporal). Cuando tengas el definitivo:
-  // url: 'https://tudominio.cl'  →  npm run build
-  url: '',
+  url: 'https://sanavidakefir.cl',
   locale: 'es_CL',
   lang: 'es-CL',
-  // TODO: número real en formato internacional sin "+" ni espacios.
-  whatsapp: '56900000000',
+  // WhatsApp de Paola (internacional, sin "+" ni espacios).
+  whatsapp: '56979848821',
+  // Clave compartida cotizador + dashboard (solo herramientas internas).
+  opsPin: '8210',
   instagram: 'https://www.instagram.com/sanavida_kefir/',
   instagramHandle: '@sanavida_kefir',
   city: 'Ovalle',
