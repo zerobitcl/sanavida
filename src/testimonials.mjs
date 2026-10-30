@@ -8,22 +8,22 @@ export const testimonials = [
     text: 'Empecé mi déficit calórico hace unas semanas y con el kéfir a shots, sin azúcar, ya no sufro de antojos ni ansiedad en el proceso.',
   },
   {
-    name: 'Lizbeth',
+    name: 'Carolina Muñoz',
     place: 'Redes',
     tag: 'Digestión',
-    text: 'Lo amo. Mi gastritis llegó a un punto en que todo me hacía mal y no podía ni dormir por el ardor. Desde que lo incorporé, me siento muchísimo mejor.',
+    text: 'Yo lo amo. Mi gastritis llegó a un punto en que todo me hacía mal y no podía ni dormir por el ardor del estómago; desde que tomo kéfir ya estoy bien.',
   },
   {
-    name: 'Janette',
+    name: 'Daniela Rojas',
     place: 'Redes',
     tag: 'Peso',
-    text: 'Bajé 12 kilos con eso. Todas las mañanas un vaso grande con plátano, sin azúcar, y no siento hambre ni ansiedad de comer.',
+    text: 'Bajé 12 kilos tomando kéfir. Todas las mañanas un vaso grande con plátano, sin nada de azúcar, y no siento hambre ni ansiedad de comer.',
   },
   {
-    name: 'Yani',
+    name: 'Marcela González',
     place: 'Redes',
     tag: 'Intestino',
-    text: 'Es verdad: tenía siempre problemas digestivos con ciertos alimentos y desde que lo tomo mejoré cien por ciento mi salud intestinal.',
+    text: 'Es verdad: tenía siempre diarrea con ciertos alimentos y desde que tomo kéfir mejoré 100 por ciento mi salud intestinal.',
   },
   {
     name: 'Cero',

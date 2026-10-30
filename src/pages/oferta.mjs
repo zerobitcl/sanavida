@@ -26,10 +26,22 @@ const gallery = [
 
 const reviews = [
   {
-    name: 'Carol',
+    name: 'Carolina Muñoz',
+    role: 'Cliente · Digestión',
+    text: 'Yo lo amo ❤️ mi gastritis llegó a un punto en que todo me hacía mal, no podía ni dormir por el ardor del estómago; recién me hice una endoscopía y biopsia y desde que tomo kéfir ya estoy bien 🙏🏻🙏🏻❤️✨',
+    photo: '/img/oferta/review-carolina.jpg',
+  },
+  {
+    name: 'Daniela Rojas',
+    role: 'Cliente · Rutina diaria',
+    text: 'Bajé 12 kilos tomando kéfir, todas las mañanas un vaso grande le pongo plátano sin nada de azúcar y no siento hambre ni ansiedad de comer.',
+    photo: '/img/oferta/review-daniela.jpg',
+  },
+  {
+    name: 'Marcela González',
     role: 'Cliente · Salud intestinal',
-    text: 'Es verdad, tenía siempre molestias digestivas con ciertos alimentos y desde que lo tomo mejoré muchísimo mi salud intestinal.',
-    photo: '/img/oferta/review-carol.jpg?v=2',
+    text: 'Es verdad tenía siempre diarrea con ciertos alimentos y desde que tomo kéfir mejoré 100 por ciento mi salud intestinal! 👍🙏🥰',
+    photo: '/img/oferta/review-marcela.jpg',
   },
   {
     name: 'Camila',
@@ -327,9 +339,7 @@ fbq('track','PageView');
       <button type="button" class="reviewarrow reviewarrow-right" id="reviewNext" aria-label="Ver siguiente reseña">›</button>
     </div>
     <div class="reviewdots" id="reviewDots">
-      <button class="active" aria-label="Ir a reseña 1"></button>
-      <button aria-label="Ir a reseña 2"></button>
-      <button aria-label="Ir a reseña 3"></button>
+      ${reviews.map((_, i) => `<button${i === 0 ? ' class="active"' : ''} aria-label="Ir a reseña ${i + 1}"></button>`).join('')}
     </div>
   </div>
 </section>
@@ -463,11 +473,28 @@ function updateReviewDots(){
 if(reviewTrack){
   const card=reviewTrack.querySelector('.reviewslide');
   const step=()=>card.getBoundingClientRect().width+18;
-  $('reviewPrev').addEventListener('click',()=>reviewTrack.scrollBy({left:-step(),behavior:'smooth'}));
-  $('reviewNext').addEventListener('click',()=>reviewTrack.scrollBy({left:step(),behavior:'smooth'}));
-  reviewDots.forEach((dot,i)=>dot.addEventListener('click',()=>reviewTrack.scrollTo({left:step()*i,behavior:'smooth'})));
+  const total=reviewDots.length;
+  const goTo=(i)=>reviewTrack.scrollTo({left:step()*((i%total+total)%total),behavior:'smooth'});
+  const next=()=>{
+    const i=Math.round(reviewTrack.scrollLeft/step());
+    goTo(i+1>=total?0:i+1);
+  };
+  const prev=()=>{
+    const i=Math.round(reviewTrack.scrollLeft/step());
+    goTo(i-1<0?total-1:i-1);
+  };
+  $('reviewPrev').addEventListener('click',prev);
+  $('reviewNext').addEventListener('click',next);
+  reviewDots.forEach((dot,i)=>dot.addEventListener('click',()=>goTo(i)));
   reviewTrack.addEventListener('scroll',()=>window.requestAnimationFrame(updateReviewDots));
   updateReviewDots();
+  let auto=window.setInterval(next,4500);
+  const pause=()=>{window.clearInterval(auto);auto=null};
+  const resume=()=>{if(!auto) auto=window.setInterval(next,4500)};
+  reviewTrack.addEventListener('pointerenter',pause);
+  reviewTrack.addEventListener('pointerleave',resume);
+  reviewTrack.addEventListener('touchstart',pause,{passive:true});
+  reviewTrack.addEventListener('touchend',resume,{passive:true});
 }
 
 const stickyBuy=$('stickyBuy');
