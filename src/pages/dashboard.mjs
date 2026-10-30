@@ -117,7 +117,9 @@ const dashInner = `
         headers: { 'X-Ops-Pin': window.svOpsPin ? window.svOpsPin() : '' }
       });
       var data = await res.json();
-      if (!res.ok || !data.ok) throw new Error(data.error || 'Error al cargar');
+      if (!res.ok || !data.ok) {
+        throw new Error((data.error || 'Error al cargar') + (data.detail ? ' — ' + data.detail : ''));
+      }
       var k = data.kpis || {};
       document.getElementById('dash-kpis').innerHTML =
         '<div class="dash-kpi"><span>Pedidos hoy</span><strong>' + (k.orders_today || 0) + '</strong></div>' +

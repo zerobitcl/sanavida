@@ -1,5 +1,7 @@
 <?php
-// Copia como config.local.php (no subir a git).
+// Preferido: /domains/sanavidakefir.cl/config.local.php (fuera de public_html → sobrevive al deploy).
+// Alternativa: api/config.local.php (se borra si el deploy Git limpia public_html).
+// No subir a git.
 return [
   'api2pdf_key' => 'TU-API-KEY',
   'unit_price' => 7500,
@@ -8,8 +10,8 @@ return [
   'db' => [
     'host' => '127.0.0.1',
     'port' => 3306,
-    'name' => 'uXXXX_sanavida',
-    'user' => 'uXXXX_sanavida',
+    'name' => 'u739953844_sanavida',
+    'user' => 'u739953844_sanavida',
     'password' => 'TU-PASSWORD',
   ],
 ];

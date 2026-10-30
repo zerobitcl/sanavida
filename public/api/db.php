@@ -7,9 +7,20 @@
 function sv_cfg(): array {
   static $cfg;
   if ($cfg === null) {
-    $file = __DIR__ . '/config.local.php';
-    if (!is_file($file)) {
-      throw new RuntimeException('Falta config.local.php');
+    // 1) api/config.local.php  2) fuera de public_html (sobrevive al deploy Git)
+    $candidates = [
+      __DIR__ . '/config.local.php',
+      dirname(__DIR__, 2) . '/config.local.php',
+    ];
+    $file = null;
+    foreach ($candidates as $path) {
+      if (is_file($path)) {
+        $file = $path;
+        break;
+      }
+    }
+    if ($file === null) {
+      throw new RuntimeException('Falta config.local.php (se borró en un deploy o nunca se subió)');
     }
     $cfg = require $file;
   }

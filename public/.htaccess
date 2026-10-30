@@ -15,6 +15,7 @@ Options -Indexes
   RewriteRule ^api/cotizacion/?$ api/cotizacion.php [L,QSA]
   RewriteRule ^api/pedido/?$ api/pedido.php [L,QSA]
   RewriteRule ^api/dashboard/?$ api/dashboard-data.php [L,QSA]
+  RewriteRule ^api/install-config/?$ api/install-config.php [L,QSA]
 
   # URLs con "/" final (SEO)
   RewriteCond %{REQUEST_FILENAME} !-f
