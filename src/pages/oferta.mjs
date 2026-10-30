@@ -16,12 +16,12 @@ const packs = {
 };
 
 const gallery = [
-  { src: '/img/oferta/carrusel-1.jpg', thumb: '/img/oferta/thumb-1.jpg', label: '1', alt: 'Kéfir SanaVida — foto 1' },
-  { src: '/img/oferta/carrusel-2.jpg', thumb: '/img/oferta/thumb-2.jpg', label: '2', alt: 'Kéfir SanaVida — foto 2' },
-  { src: '/img/oferta/carrusel-3.jpg', thumb: '/img/oferta/thumb-3.jpg', label: '3', alt: 'Kéfir SanaVida — foto 3' },
-  { src: '/img/oferta/carrusel-4.jpg', thumb: '/img/oferta/thumb-4.jpg', label: '4', alt: 'Kéfir SanaVida — foto 4' },
-  { src: '/img/oferta/carrusel-5.jpg', thumb: '/img/oferta/thumb-5.jpg', label: '5', alt: 'Kéfir SanaVida — foto 5' },
-  { src: '/img/oferta/carrusel-6.jpg', thumb: '/img/oferta/thumb-6.jpg', label: '6', alt: 'Kéfir SanaVida — foto 6' },
+  { src: '/img/oferta/carrusel-1.jpg', alt: 'Kéfir SanaVida — foto 1' },
+  { src: '/img/oferta/carrusel-2.jpg', alt: 'Kéfir SanaVida — foto 2' },
+  { src: '/img/oferta/carrusel-3.jpg', alt: 'Kéfir SanaVida — foto 3' },
+  { src: '/img/oferta/carrusel-4.jpg', alt: 'Kéfir SanaVida — foto 4' },
+  { src: '/img/oferta/carrusel-5.jpg', alt: 'Kéfir SanaVida — foto 5' },
+  { src: '/img/oferta/carrusel-6.jpg', alt: 'Kéfir SanaVida — foto 6' },
 ];
 
 const reviews = [
@@ -96,14 +96,6 @@ export default {
     const url = abs(pagePath('oferta'));
     const waNumber = site.whatsapp && !String(site.whatsapp).includes('00000000') ? site.whatsapp : '';
     const seremi = site.legal.seremi;
-
-    const thumbs = gallery
-      .map(
-        (g, i) => `<button type="button" class="thumb${i === 0 ? ' active' : ''}" data-slide="${i}" aria-label="Ver foto ${esc(g.label)}">
-  <img src="${g.thumb}" alt="" width="160" height="94" loading="${i === 0 ? 'eager' : 'lazy'}" decoding="async">
-</button>`,
-      )
-      .join('');
 
     const reviewSlides = reviews
       .map(
@@ -180,6 +172,16 @@ export default {
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400..700&family=Nunito:wght@400..800&display=swap">
 <script type="application/ld+json">${JSON.stringify(schema)}</script>
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','2912846832410926');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2912846832410926&ev=PageView&noscript=1" alt=""></noscript>
 <style>${styles}</style>
 </head>
 <body>
@@ -194,11 +196,9 @@ export default {
 <main>
 <section class="wrap hero">
   <div class="gallery">
-    <div class="picture" id="mainPicture">
-      <span class="mark">NATURAL · ARTESANAL</span>
+    <div class="picture" id="mainPicture" aria-live="polite">
       <img class="hero-shot" id="heroShot" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="720" height="550" fetchpriority="high" decoding="async">
     </div>
-    <div class="thumbs" aria-label="Galería de fotografías">${thumbs}</div>
   </div>
 
   <div class="hero-copy">
@@ -436,14 +436,19 @@ document.querySelectorAll('input[name="topPack"]').forEach(x=>x.addEventListener
 $('formPack').addEventListener('change',e=>{selection=e.target.value;render()});
 render();
 
-document.querySelectorAll('[data-slide]').forEach(el=>el.addEventListener('click',()=>{
-  document.querySelectorAll('[data-slide]').forEach(y=>y.classList.remove('active'));
-  el.classList.add('active');
-  const scene=gallery[Number(el.dataset.slide)];
-  const shot=$('heroShot');
-  shot.src=scene.src;
-  shot.alt=scene.alt;
-}));
+let slide=0;
+const shot=$('heroShot');
+gallery.forEach((g,i)=>{if(i>0){const pre=new Image();pre.src=g.src;}});
+setInterval(()=>{
+  slide=(slide+1)%gallery.length;
+  const scene=gallery[slide];
+  shot.classList.add('is-fading');
+  window.setTimeout(()=>{
+    shot.src=scene.src;
+    shot.alt=scene.alt;
+    shot.classList.remove('is-fading');
+  },220);
+},3800);
 
 const reviewTrack=$('reviewTrack');
 const reviewDots=[...document.querySelectorAll('#reviewDots button')];
@@ -482,7 +487,12 @@ $('orderForm').addEventListener('submit',e=>{
   const address=$('customerAddress').value.trim();
   const notes=$('customerNotes').value.trim();
   const o=offers[selection];
-  const message='Hola, soy '+name+'. Quiero solicitar '+o.qty+' litro(s) de kéfir SanaVida.\\nPack: '+clp(o.price)+'\\nAhorro: '+clp(o.save)+'\\nReparto de referencia: '+clp(deliveryFee)+'\\nTotal estimado: '+clp(o.price+deliveryFee)+'\\nWhatsApp: '+phone+'\\nComuna: '+city+'\\nDirección: '+address+(notes?'\\nIndicaciones: '+notes:'')+'\\n¿Podemos coordinar mi pedido?';
+  const total=o.price+deliveryFee;
+  const message='Hola, soy '+name+'. Quiero solicitar '+o.qty+' litro(s) de kéfir SanaVida.\\nPack: '+clp(o.price)+'\\nAhorro: '+clp(o.save)+'\\nReparto de referencia: '+clp(deliveryFee)+'\\nTotal estimado: '+clp(total)+'\\nWhatsApp: '+phone+'\\nComuna: '+city+'\\nDirección: '+address+(notes?'\\nIndicaciones: '+notes:'')+'\\n¿Podemos coordinar mi pedido?';
+  if(typeof fbq==='function'){
+    fbq('track','Lead',{content_name:'Pedido kéfir oferta',content_category:'kéfir',value:total,currency:'CLP'});
+    fbq('track','Purchase',{content_name:'Pedido kéfir oferta',content_type:'product',contents:[{id:'pack-'+o.qty+'L',quantity:1,item_price:o.price}],value:total,currency:'CLP',num_items:o.qty});
+  }
   const status=$('formStatus');
   status.hidden=false;
   if(waNumber){
