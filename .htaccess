@@ -1,0 +1,52 @@
+ErrorDocument 404 /404.html
+DirectoryIndex index.html index.php
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+  RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+  RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # APIs PHP
+  RewriteRule ^api/cotizacion/?$ api/cotizacion.php [L,QSA]
+  RewriteRule ^api/pedido/?$ api/pedido.php [L,QSA]
+  RewriteRule ^api/dashboard/?$ api/dashboard-data.php [L,QSA]
+  RewriteRule ^api/install-config/?$ api/install-config.php [L,QSA]
+
+  # URLs con "/" final (SEO)
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_URI} !/$
+  RewriteCond %{REQUEST_URI} !^/api/
+  RewriteRule ^(.*)$ /$1/ [L,R=301]
+</IfModule>
+
+# No exponer secretos ni helpers
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(config\.local|config\.example|db)\.php$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css image/svg+xml application/xml text/plain
+</IfModule>
+
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/html "access plus 0 seconds"
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+</IfModule>
+
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
