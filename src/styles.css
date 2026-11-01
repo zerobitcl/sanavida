@@ -387,7 +387,8 @@ tbody th { font-weight: 600; }
 .panel-note { margin: 0 0 1rem; font-size: .88rem; color: var(--muted); }
 .ufc-badge { display: inline-block; padding: .35rem .7rem; border-radius: 999px; background: var(--teal); color: #fff; font-weight: 700; font-size: .92rem; white-space: nowrap; }
 .safe-tag { display: inline-block; margin-left: .4rem; padding: .15rem .5rem; border-radius: 999px; background: var(--sun-50); color: #9a6200; font-size: .72rem; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
-.data-table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+/* min-width:0 — anula el `table { min-width:560px }` global que cortaba en móviles. */
+.data-table { width: 100%; min-width: 0; border-collapse: collapse; font-size: .95rem; }
 .data-table th, .data-table td { padding: .85rem 1rem; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
 .data-table thead th { background: var(--plum); color: #fff; font-size: .82rem; letter-spacing: .04em; text-transform: uppercase; }
 .data-table tbody th { font-weight: 600; color: var(--ink); width: 48%; }
@@ -395,8 +396,11 @@ tbody th { font-weight: 600; }
 .row-note { display: block; font-weight: 400; color: var(--muted); font-size: .8rem; margin-top: .2rem; }
 .micro-table tr.is-hot { background: rgba(0, 137, 123, .06); }
 .micro-table tr.is-safe { background: rgba(245, 158, 11, .08); }
-.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; border-radius: 14px; border: 1px solid var(--line); }
+.table-scroll { width: 100%; max-width: 100%; overflow-x: auto; -webkit-overflow-scrolling: touch; overscroll-behavior-x: contain; border-radius: 14px; border: 1px solid var(--line); }
 .table-scroll .data-table { margin: 0; }
+.nutri-table { table-layout: fixed; }
+.nutri-table tbody th { width: 46%; word-break: break-word; hyphens: auto; }
+.nutri-table td { width: 27%; font-variant-numeric: tabular-nums; }
 .desk-split { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1rem; }
 .tabs { display: none; }
 .tabs > input { position: absolute; opacity: 0; pointer-events: none; }
@@ -476,6 +480,13 @@ tbody th { font-weight: 600; }
   .display { font-size: clamp(2rem, 9vw, 2.75rem); }
   .btn { max-width: 100%; }
   .hero-actions .btn { justify-content: center; }
+  .data-table { font-size: .82rem; }
+  .data-table th, .data-table td { padding: .65rem .5rem; }
+  .data-table thead th { font-size: .68rem; letter-spacing: .02em; padding: .6rem .45rem; }
+  .nutri-table tbody th { width: 42%; }
+  .nutri-table td { width: 29%; text-align: right; }
+  .tab-labels { flex-direction: column; gap: .4rem; }
+  .tab-labels label { border-radius: 14px; }
 }
 /* —— Pitch ads (guion videos) —— */
 .pitch-symptoms { background: linear-gradient(180deg, var(--milk), var(--lilac-50)); }

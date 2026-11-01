@@ -152,20 +152,22 @@ export const labNutrition = () => {
       <div class="tab-panels">
         <div class="tab-panel tab-micro" role="tabpanel">
           <p class="panel-note">${esc(site.lab.displayName)} · por gramo de producto</p>
-          <table class="data-table micro-table">
-            <caption class="sr-only">Recuento microbiológico por gramo</caption>
-            <thead><tr><th scope="col">Parámetro</th><th scope="col">Resultado</th></tr></thead>
-            <tbody>
-              ${microRows().map((r) => `<tr class="${r.highlight ? 'is-hot' : ''}${r.safe ? ' is-safe' : ''}"><th scope="row">${esc(r.label)}</th><td>${r.highlight ? `<span class="ufc-badge">${fmtUfc(r.value)} ${esc(r.unit)}</span>` : `${esc(String(r.value))}${r.unit ? ` ${esc(r.unit)}` : ''}`}${r.safe ? ' <span class="safe-tag">Inocuidad</span>' : ''}</td></tr>`).join('')}
-            </tbody>
-          </table>
+          <div class="table-scroll">
+            <table class="data-table micro-table">
+              <caption class="sr-only">Recuento microbiológico por gramo</caption>
+              <thead><tr><th scope="col">Parámetro</th><th scope="col">Resultado</th></tr></thead>
+              <tbody>
+                ${microRows().map((r) => `<tr class="${r.highlight ? 'is-hot' : ''}${r.safe ? ' is-safe' : ''}"><th scope="row">${esc(r.label)}</th><td>${r.highlight ? `<span class="ufc-badge">${fmtUfc(r.value)} ${esc(r.unit)}</span>` : `${esc(String(r.value))}${r.unit ? ` ${esc(r.unit)}` : ''}`}${r.safe ? ' <span class="safe-tag">Inocuidad</span>' : ''}</td></tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
         </div>
         <div class="tab-panel tab-nutri" role="tabpanel">
           <p class="panel-note">Tamaño de porción: ${esc(n.servingSize)} · Porciones por envase: ${n.servingsPerPackage} (Botella ${site.product.size})</p>
           <div class="table-scroll">
             <table class="data-table nutri-table">
               <caption class="sr-only">Información nutricional por 100 ml y por porción</caption>
-              <thead><tr><th scope="col">Parámetro</th><th scope="col">100 ml</th><th scope="col">1 porción (${site.product.servingMl} ml)</th></tr></thead>
+              <thead><tr><th scope="col">Parámetro</th><th scope="col">100&nbsp;ml</th><th scope="col">Porción</th></tr></thead>
               <tbody>
                 ${n.rows.map((r) => `<tr><th scope="row">${esc(r.param)}${r.unit ? ` <span class="u">(${esc(r.unit)})</span>` : ''}${r.note ? `<small class="row-note">${esc(r.note)}</small>` : ''}</th><td>${esc(String(r.per100))}</td><td>${esc(String(r.perServing))}</td></tr>`).join('')}
               </tbody>
