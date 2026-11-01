@@ -1,6 +1,10 @@
 import { landing } from '../landing.mjs';
 import { site } from '../config.mjs';
 
+const r = site.media.recipes;
+const fig = (src, alt) =>
+  `<figure class="recipe-fig"><img src="${src}" width="800" height="800" loading="lazy" decoding="async" alt="${alt}"></figure>`;
+
 export default landing({
   slug: 'recetas-con-kefir',
   nav: 'Recetas con kéfir',
@@ -23,7 +27,8 @@ export default landing({
     {
       id: 'batido-frutillas-arandanos',
       title: 'Batido de frutillas y arándanos',
-      html: `<p>El favorito para empezar: el dulzor natural de los frutos rojos equilibra la acidez del kéfir.</p>
+      html: `${fig(r.batidoBerries, 'Batido de kéfir SanaVida con frutillas y arándanos')}
+<p>El favorito para empezar: el dulzor natural de los frutos rojos equilibra la acidez del kéfir.</p>
 <ul>
 <li>1 vaso de kéfir SanaVida, directo de la botella</li>
 <li>5 frutillas</li>
@@ -35,7 +40,8 @@ export default landing({
     {
       id: 'batido-platano',
       title: 'Batido de plátano y avena',
-      html: `<p>La puerta de entrada favorita si el sabor ácido te sorprende.</p>
+      html: `${fig(r.batidoPlatano, 'Batido de kéfir con plátano y avena')}
+<p>La puerta de entrada favorita si el sabor ácido te sorprende.</p>
 <ul>
 <li>1 vaso de kéfir</li>
 <li>½ plátano maduro</li>
@@ -47,17 +53,20 @@ export default landing({
     {
       id: 'bowl',
       title: 'Bowl de desayuno',
-      html: `<p>Sirve el kéfir en un bowl y agrega granola, semillas de chía, frutillas o fruta de la estación. Queda como un yogur bowl, pero con más vida.</p>`,
+      html: `${fig(r.bowl, 'Bowl de desayuno con kéfir, granola, frutillas y arándanos')}
+<p>Sirve el kéfir en un bowl y agrega granola, semillas de chía, frutillas o fruta de la estación. Queda como un yogur bowl, pero con más vida.</p>`,
     },
     {
       id: 'frutillas-miel',
       title: 'Con frutillas y miel',
-      html: `<p>Pica frutillas, úntalas con un poco de miel y mézclalas con el kéfir. Simple, rápido y muy pedido en verano.</p>`,
+      html: `${fig(r.frutillasMiel, 'Kéfir con frutillas frescas y miel')}
+<p>Pica frutillas, úntalas con un poco de miel y mézclalas con el kéfir. Simple, rápido y muy pedido en verano.</p>`,
     },
     {
       id: 'aderezo',
       title: 'Aderezo salado (tipo tzatziki)',
-      html: `<ul>
+      html: `${fig(r.aderezo, 'Aderezo de kéfir tipo tzatziki con pepino y eneldo')}
+<ul>
 <li>1 vaso de kéfir (si está muy líquido, cuélalo 1–2 horas)</li>
 <li>Pepino rallado y escurrido</li>
 <li>Ajo picado, eneldo o cilantro, sal y limón</li>

@@ -95,8 +95,16 @@ export const site = {
   media: {
     processVideo: '/video/proceso.webm',
     processPoster: '/img/proceso-poster.webp',
-    berries: '/img/batido-frutillas-arandanos.webp',
+    berries: '/img/recetas/batido-frutillas-arandanos.jpg',
     maker: '/img/pao.jpg',
+    recipes: {
+      vaso: '/img/recetas/vaso-kefir.jpg',
+      batidoBerries: '/img/recetas/batido-frutillas-arandanos.jpg',
+      batidoPlatano: '/img/recetas/batido-platano-avena.jpg',
+      bowl: '/img/recetas/bowl-desayuno.jpg',
+      frutillasMiel: '/img/recetas/frutillas-miel.jpg',
+      aderezo: '/img/recetas/aderezo-tzatziki.jpg',
+    },
   },
   logo: { src: '/img/brand/logo-240.png', large: '/img/brand/logo-480.png', w: 1179, h: 786 },
   claims: {

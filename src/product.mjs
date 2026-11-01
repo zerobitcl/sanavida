@@ -202,7 +202,9 @@ export const labNutrition = () => {
 </section>`;
 };
 
-export const howToEnjoy = () => `
+export const howToEnjoy = () => {
+  const r = site.media.recipes;
+  return `
 <section class="section enjoy" id="como-disfrutar" aria-labelledby="enjoy-title">
   <div class="wrap">
     <p class="eyebrow">Modo de uso</p>
@@ -210,17 +212,17 @@ export const howToEnjoy = () => `
     <p class="lead">${esc(site.product.conservation)}</p>
     <div class="enjoy-grid">
       <article class="enjoy-card">
-        <div class="enjoy-ph enjoy-ph-a" aria-hidden="true"></div>
+        <img class="enjoy-ph" src="${r.vaso}" width="640" height="480" loading="lazy" decoding="async" alt="Vaso de kéfir natural SanaVida">
         <h3>Directo del vaso</h3>
         <p>Agita la botella (conservada entre 4° y 8°C) y sirve <strong>200 ml</strong> puros. Una porción, sin adornos.</p>
       </article>
       <article class="enjoy-card">
-        <div class="enjoy-ph enjoy-ph-b" aria-hidden="true"></div>
+        <img class="enjoy-ph" src="${r.batidoBerries}" width="640" height="640" loading="lazy" decoding="async" alt="Batido de kéfir con frutillas y arándanos">
         <h3>Batidos antioxidantes</h3>
         <p>Licúalo con frutillas y arándanos frescos para un desayuno cremoso, con el cultivo vivo de la fermentación.</p>
       </article>
       <article class="enjoy-card">
-        <div class="enjoy-ph enjoy-ph-c" aria-hidden="true"></div>
+        <img class="enjoy-ph" src="${r.bowl}" width="640" height="640" loading="lazy" decoding="async" alt="Bowl de desayuno con kéfir, granola y fruta">
         <h3>Bowl de desayuno</h3>
         <p>Úsalo como base con fruta picada, semillas o frutos secos, sin pesadez estomacal. 100% sin lactosa.</p>
       </article>
@@ -228,6 +230,7 @@ export const howToEnjoy = () => `
     <p class="center"><a class="link" href="/recetas-con-kefir/">Más recetas con kéfir ${icon('arrow')}</a></p>
   </div>
 </section>`;
+};
 
 export const legalTrust = () => {
   const { legal, lab, product } = site;
