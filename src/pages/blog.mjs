@@ -8,6 +8,7 @@ const posts = [
     body: 'Plan de cucharadas, señales normales y cuándo subir la dosis.',
     href: '/como-tomar-kefir/',
     cta: 'Leer guía',
+    image: '/img/blog/blog-empezar-kefir.jpg',
   },
   {
     title: 'Kéfir vs yogur: qué cambia de verdad',
@@ -15,6 +16,7 @@ const posts = [
     body: 'Cultivos, lactosa y por qué el kéfir no es “otro yogur”.',
     href: '/kefir-vs-yogurt/',
     cta: 'Leer guía',
+    image: '/img/blog/blog-kefir-vs-yogurt.jpg',
   },
   {
     title: 'Qué dice el laboratorio de nuestro kéfir',
@@ -22,6 +24,7 @@ const posts = [
     body: 'UFC/g certificados y cómo leer el análisis sin marketing vacío.',
     href: '/bacterias-del-kefir/',
     cta: 'Leer guía',
+    image: '/img/blog/blog-laboratorio.jpg',
   },
   {
     title: 'Beneficios del kéfir para la digestión',
@@ -29,6 +32,7 @@ const posts = [
     body: 'Gases, hinchazón y cómo incorporarlo con calma.',
     href: '/kefir-beneficios-digestion/',
     cta: 'Leer guía',
+    image: '/img/blog/blog-digestion.jpg',
   },
   {
     title: 'Recetas con kéfir',
@@ -36,6 +40,7 @@ const posts = [
     body: 'Batidos, bowls y formas ricas de tomarlo todos los días.',
     href: '/recetas-con-kefir/',
     cta: 'Ver recetas',
+    image: '/img/blog/blog-recetas.jpg',
   },
   {
     title: 'Kéfir y lactosa',
@@ -43,6 +48,7 @@ const posts = [
     body: 'Por qué muchas personas con intolerancia leve lo toleran mejor.',
     href: '/kefir-intolerancia-lactosa/',
     cta: 'Leer guía',
+    image: '/img/blog/blog-lactosa.jpg',
   },
 ];
 

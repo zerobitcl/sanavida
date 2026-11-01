@@ -141,6 +141,20 @@ export default {
           description: site.claims.short,
           image: abs('/img/oferta/carrusel-1.jpg'),
           brand: { '@type': 'Brand', name: site.name },
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: '5.0',
+            bestRating: '5',
+            worstRating: '1',
+            ratingCount: String(reviews.length),
+            reviewCount: String(reviews.length),
+          },
+          review: reviews.map((r) => ({
+            '@type': 'Review',
+            author: { '@type': 'Person', name: r.name },
+            reviewBody: r.text,
+            reviewRating: { '@type': 'Rating', ratingValue: '5', bestRating: '5', worstRating: '1' },
+          })),
           offers: {
             '@type': 'AggregateOffer',
             priceCurrency: 'CLP',
@@ -148,6 +162,41 @@ export default {
             highPrice: packs[3].price,
             offerCount: 3,
             availability: 'https://schema.org/InStock',
+            url,
+            itemCondition: 'https://schema.org/NewCondition',
+            hasMerchantReturnPolicy: {
+              '@type': 'MerchantReturnPolicy',
+              '@id': abs('/politicas/#reembolsos'),
+              applicableCountry: 'CL',
+              returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+              merchantReturnDays: 1,
+              returnMethod: 'https://schema.org/ReturnInStore',
+              returnFees: 'https://schema.org/FreeReturn',
+              refundType: 'https://schema.org/FullRefund',
+              merchantReturnLink: abs('/politicas/#reembolsos'),
+            },
+            shippingDetails: [
+              {
+                '@type': 'OfferShippingDetails',
+                shippingRate: { '@type': 'MonetaryAmount', value: String(site.deliveryFee), currency: 'CLP' },
+                shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CL' },
+                deliveryTime: {
+                  '@type': 'ShippingDeliveryTime',
+                  handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
+                  transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 5, unitCode: 'DAY' },
+                },
+              },
+              {
+                '@type': 'OfferShippingDetails',
+                shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'CLP' },
+                shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CL' },
+                deliveryTime: {
+                  '@type': 'ShippingDeliveryTime',
+                  handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+                  transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 0, unitCode: 'DAY' },
+                },
+              },
+            ],
           },
         },
         {

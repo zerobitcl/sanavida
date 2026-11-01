@@ -2,6 +2,7 @@
 import { site, waLink, abs, clp, fmtUfc, pagePath } from './config.mjs';
 import {
   esc, btnWa, icon, breadcrumbs, breadcrumbSchema, faq, faqSchema, delivery, ctaBand, related, hasMedia,
+  productOfferExtras, productReviewFields, testimonialsBlock,
 } from './components.mjs';
 
 const checkSvg = `<svg class="check" viewBox="0 0 20 20" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M8.2 14.4 3.8 10l1.4-1.4 3 3 6.6-6.6L16.2 6z"/></svg>`;
@@ -295,6 +296,8 @@ export const productSchemaFull = () => {
     },
   };
 
+  Object.assign(schema, productReviewFields());
+
   if (p.price) {
     schema.offers = {
       '@type': 'Offer',
@@ -304,6 +307,7 @@ export const productSchemaFull = () => {
       url: abs('/kefir-en-botella/'),
       areaServed: site.region,
       seller: { '@id': abs('/#negocio') },
+      ...productOfferExtras(),
     };
   }
 
@@ -347,6 +351,7 @@ ${bodyFlow()}
 ${gutBrain()}
 ${labNutrition()}
 ${howToEnjoy()}
+${testimonialsBlock()}
 ${legalTrust()}
 ${delivery()}
 ${faq(faqs, 'Preguntas frecuentes sobre el kéfir SanaVida')}

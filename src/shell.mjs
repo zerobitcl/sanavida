@@ -56,9 +56,13 @@ ${page.hideCtaBand ? '' : ctaBand(page.ctaTitle, page.ctaText)}`;
   };
 }
 
-export const placeholderCard = ({ title, meta, body, href, cta = 'Ver' }) => `
+export const placeholderCard = ({ title, meta, body, href, cta = 'Ver', image, imageAlt }) => {
+  const media = image
+    ? `<img class="shell-card-media" src="${esc(image)}" width="640" height="400" loading="lazy" decoding="async" alt="${esc(imageAlt || title)}">`
+    : `<div class="shell-card-media" aria-hidden="true"></div>`;
+  return `
 <article class="shell-card">
-  <div class="shell-card-media" aria-hidden="true"></div>
+  ${media}
   <div class="shell-card-body">
     ${meta ? `<span class="tag">${esc(meta)}</span>` : ''}
     <h3>${esc(title)}</h3>
@@ -66,6 +70,7 @@ export const placeholderCard = ({ title, meta, body, href, cta = 'Ver' }) => `
     ${href ? `<a class="link" href="${href}">${esc(cta)} ${icon('arrow')}</a>` : ''}
   </div>
 </article>`;
+};
 
 export const formField = ({ name, label, type = 'text', required = true, options, placeholder, rows }) => {
   const id = `f-${name}`;

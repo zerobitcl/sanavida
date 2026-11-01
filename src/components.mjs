@@ -208,6 +208,8 @@ export const science = (current = '') => `
   </div>
 </section>`;
 
+const starsLabel = (n = 5) => '★'.repeat(Math.max(1, Math.min(5, Math.round(n))));
+
 export const testimonialsBlock = () =>
   testimonials.length
     ? `
@@ -216,11 +218,81 @@ export const testimonialsBlock = () =>
     <p class="eyebrow">Experiencias reales</p>
     <h2 id="test-title" class="h2">Lo que cuentan quienes ya lo toman</h2>
     <div class="test-grid">
-      ${testimonials.map((t) => `<figure class="test-card">${t.tag ? `<span class="tag">${esc(t.tag)}</span>` : ''}<blockquote>“${esc(t.text)}”</blockquote><figcaption><strong>${esc(t.name)}</strong>${t.place ? ` · ${esc(t.place)}` : ''}</figcaption></figure>`).join('')}
+      ${testimonials
+        .map(
+          (t) => `<figure class="test-card">${t.tag ? `<span class="tag">${esc(t.tag)}</span>` : ''}<p class="test-stars" aria-label="${t.rating || 5} de 5 estrellas">${starsLabel(t.rating)}</p><blockquote>“${esc(t.text)}”</blockquote><figcaption><strong>${esc(t.name)}</strong>${t.place ? ` · ${esc(t.place)}` : ''}</figcaption></figure>`,
+        )
+        .join('')}
     </div>
   </div>
 </section>`
     : '';
+
+// Extras de Offer para Merchant listings (GSC): envío + devoluciones alineados a /politicas.
+export const productOfferExtras = () => ({
+  itemCondition: 'https://schema.org/NewCondition',
+  hasMerchantReturnPolicy: {
+    '@type': 'MerchantReturnPolicy',
+    '@id': abs('/politicas/#reembolsos'),
+    applicableCountry: 'CL',
+    returnPolicyCategory: 'https://schema.org/MerchantReturnFiniteReturnWindow',
+    merchantReturnDays: 1,
+    returnMethod: 'https://schema.org/ReturnInStore',
+    returnFees: 'https://schema.org/FreeReturn',
+    refundType: 'https://schema.org/FullRefund',
+    merchantReturnLink: abs('/politicas/#reembolsos'),
+  },
+  shippingDetails: [
+    {
+      '@type': 'OfferShippingDetails',
+      shippingRate: { '@type': 'MonetaryAmount', value: String(site.deliveryFee), currency: 'CLP' },
+      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CL' },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 2, unitCode: 'DAY' },
+        transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 5, unitCode: 'DAY' },
+      },
+    },
+    {
+      '@type': 'OfferShippingDetails',
+      shippingRate: { '@type': 'MonetaryAmount', value: '0', currency: 'CLP' },
+      shippingDestination: { '@type': 'DefinedRegion', addressCountry: 'CL' },
+      deliveryTime: {
+        '@type': 'ShippingDeliveryTime',
+        handlingTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 1, unitCode: 'DAY' },
+        transitTime: { '@type': 'QuantitativeValue', minValue: 0, maxValue: 0, unitCode: 'DAY' },
+      },
+    },
+  ],
+});
+
+// Solo reseñas visibles en el sitio (no inventar conteos tipo “376”).
+export const productReviewFields = () => {
+  if (!testimonials.length) return {};
+  const ratings = testimonials.map((t) => Number(t.rating) || 5);
+  const avg = ratings.reduce((a, b) => a + b, 0) / ratings.length;
+  return {
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: avg.toFixed(1),
+      bestRating: '5',
+      worstRating: '1',
+      ratingCount: String(ratings.length),
+      reviewCount: String(ratings.length),
+    },
+    review: testimonials.map((t) => ({
+      '@type': 'Review',
+      author: { '@type': 'Person', name: t.name },
+      reviewBody: t.text,
+      reviewRating: {
+        '@type': 'Rating',
+        ratingValue: String(t.rating || 5),
+        bestRating: '5',
+        worstRating: '1',
+      },
+    })),
+  };
+};
 
 export const orderSteps = () => `
 <section class="section order" aria-labelledby="order-title">
@@ -320,13 +392,16 @@ export const productSchema = () => {
     image: abs('/img/og.png'),
     brand: { '@type': 'Brand', name: site.name },
     size: p.size,
+    ...productReviewFields(),
     offers: {
       '@type': 'Offer',
       price: p.price,
       priceCurrency: 'CLP',
       availability: 'https://schema.org/InStock',
+      url: abs('/kefir-en-botella/'),
       areaServed: site.region,
       seller: { '@id': abs('/#negocio') },
+      ...productOfferExtras(),
     },
   };
 };
