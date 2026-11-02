@@ -258,7 +258,8 @@ fbq('track','PageView');
 <section class="wrap hero">
   <div class="gallery">
     <div class="picture" id="mainPicture" aria-live="polite">
-      <img class="hero-shot" id="heroShot" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="1254" height="1254" fetchpriority="high" decoding="async">
+      <img class="hero-shot is-active" id="heroShotA" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="1254" height="1254" fetchpriority="high" decoding="async">
+      <img class="hero-shot" id="heroShotB" src="${gallery[1] ? gallery[1].src : gallery[0].src}" alt="" width="1254" height="1254" decoding="async" aria-hidden="true">
     </div>
   </div>
 
@@ -496,18 +497,41 @@ $('formPack').addEventListener('change',e=>{selection=e.target.value;render()});
 render();
 
 let slide=0;
-const shot=$('heroShot');
-gallery.forEach((g,i)=>{if(i>0){const pre=new Image();pre.src=g.src;}});
-setInterval(()=>{
-  slide=(slide+1)%gallery.length;
+let frontIsA=true;
+const shotA=$('heroShotA');
+const shotB=$('heroShotB');
+let galleryBusy=false;
+gallery.forEach((g)=>{const pre=new Image();pre.src=g.src;});
+function showSlide(next){
+  if(galleryBusy||gallery.length<2) return;
+  galleryBusy=true;
+  slide=(next+gallery.length)%gallery.length;
   const scene=gallery[slide];
-  shot.classList.add('is-fading');
-  window.setTimeout(()=>{
-    shot.src=scene.src;
-    shot.alt=scene.alt;
-    shot.classList.remove('is-fading');
-  },220);
-},3800);
+  const incoming=frontIsA?shotB:shotA;
+  const outgoing=frontIsA?shotA:shotB;
+  let revealed=false;
+  const reveal=()=>{
+    if(revealed) return;
+    revealed=true;
+    incoming.onload=null;
+    incoming.onerror=null;
+    incoming.alt=scene.alt;
+    incoming.removeAttribute('aria-hidden');
+    outgoing.setAttribute('aria-hidden','true');
+    outgoing.alt='';
+    incoming.classList.add('is-active');
+    outgoing.classList.remove('is-active');
+    frontIsA=!frontIsA;
+    window.setTimeout(()=>{galleryBusy=false;},780);
+  };
+  incoming.onerror=()=>{incoming.onerror=null;galleryBusy=false;};
+  if(incoming.getAttribute('src')!==scene.src){
+    incoming.onload=reveal;
+    incoming.src=scene.src;
+  }
+  if(incoming.complete) reveal();
+}
+setInterval(()=>showSlide(slide+1),4200);
 
 const reviewTrack=$('reviewTrack');
 const reviewDots=[...document.querySelectorAll('#reviewDots button')];
