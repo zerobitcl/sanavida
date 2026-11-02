@@ -9,7 +9,7 @@ export default shellPage({
   description: `Términos de uso, privacidad, entregas y condiciones de ${site.name} (${site.legal.company}).`,
   eyebrow: 'Legal',
   h1: `Políticas y <em>condiciones</em>`,
-  lead: `${site.legal.company} (RUT ${site.legal.rut}) · ${site.legal.address}, ${site.legal.city}, Chile.`,
+  lead: `${site.legal.company} (RUT ${site.legal.rut}) · ${site.legal.city}, Chile · Autorización sanitaria SEREMI.`,
   hideCta: true,
   hideCtaBand: true,
   blocks: [
@@ -18,7 +18,7 @@ export default shellPage({
       eyebrow: '01',
       title: 'Términos y condiciones',
       html: `<div class="shell-legal prose">
-        <p>El sitio y los pedidos de ${site.name} son operados por <strong>${site.legal.company}</strong> (RUT ${site.legal.rut}), con domicilio en ${site.legal.address}, ${site.legal.city}, ${site.legal.region}, Chile.</p>
+        <p>El sitio y los pedidos de ${site.name} son operados por <strong>${site.legal.company}</strong> (RUT ${site.legal.rut}), en ${site.legal.city}, ${site.legal.region}, Chile. Autorización sanitaria: Resolución Exenta N.º ${site.legal.seremi.resolution} de la ${site.legal.seremi.authority}.</p>
         <p>Al solicitar un pedido aceptas la disponibilidad del producto, el precio informado y la coordinación de entrega o retiro según tu comuna. Los pedidos se confirman por WhatsApp u otro canal acordado.</p>
         <p>La jurisdicción aplicable es la de los tribunales de ${site.legal.city}, Chile.</p>
       </div>`,

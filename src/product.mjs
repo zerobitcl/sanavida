@@ -242,7 +242,7 @@ export const legalTrust = () => {
   <div class="wrap legal-box">
     <p class="eyebrow">E-E-A-T local</p>
     <h2 id="legal-title" class="h2">Trazabilidad y respaldo sanitario</h2>
-    <p>Elaborado y envasado en origen por <strong>${esc(legal.company)}</strong> (RUT ${esc(legal.rut)}), ${esc(legal.address)}, ${esc(legal.city)}, ${esc(legal.country)}. Planta autorizada por <strong>${esc(legal.seremi.authority)}</strong> — Resolución Exenta N.º <strong>${esc(legal.seremi.resolution)}</strong> (${esc(legal.seremi.date)}) · Código de validación oficial: <strong>${esc(legal.seremi.validationCode)}</strong> en <a href="${legal.seremi.validationUrl}" rel="noopener" target="_blank">seremienlinea.minsal.cl</a>.</p>
+    <p>Elaborado y envasado por <strong>${esc(legal.company)}</strong> (RUT ${esc(legal.rut)}) en ${esc(legal.city)}, ${esc(legal.country)}. Autorizado sanitariamente por <strong>${esc(legal.seremi.authority)}</strong> — Resolución Exenta N.º <strong>${esc(legal.seremi.resolution)}</strong> (${esc(legal.seremi.date)}) · Código de validación oficial: <strong>${esc(legal.seremi.validationCode)}</strong> en <a href="${legal.seremi.validationUrl}" rel="noopener" target="_blank">seremienlinea.minsal.cl</a>.</p>
     <ul class="legal-pills">
       <li>Lab. ${esc(lab.displayName)}</li>
       <li>${esc(product.size)} · ${product.servings} porciones</li>
@@ -290,7 +290,6 @@ export const productSchemaFull = () => {
       taxID: site.legal.rut,
       address: {
         '@type': 'PostalAddress',
-        streetAddress: site.legal.address,
         addressLocality: site.legal.city,
         addressRegion: site.legal.region,
         addressCountry: 'CL',

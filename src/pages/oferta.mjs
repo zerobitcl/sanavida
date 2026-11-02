@@ -258,7 +258,7 @@ fbq('track','PageView');
 <section class="wrap hero">
   <div class="gallery">
     <div class="picture" id="mainPicture" aria-live="polite">
-      <img class="hero-shot" id="heroShot" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="720" height="550" fetchpriority="high" decoding="async">
+      <img class="hero-shot" id="heroShot" src="${gallery[0].src}" alt="${esc(gallery[0].alt)}" width="1254" height="1254" fetchpriority="high" decoding="async">
     </div>
   </div>
 
@@ -398,7 +398,7 @@ fbq('track','PageView');
     <img class="maker-face" src="/img/oferta/pao-web.jpg" alt="${esc(site.maker.name)}" width="88" height="88" loading="lazy" decoding="async">
     <div class="credential-body">
       <h3>Elaboración con resolución sanitaria</h3>
-      <p>En SanaVida nos preocupamos de elaborar un producto bajo las condiciones sanitarias autorizadas (Res. Exenta N.º ${esc(seremi.resolution)}, ${esc(seremi.authority)}), para que puedas comprar con mayor confianza. Elaborado por ${esc(site.maker.name)} en ${site.city}.</p>
+      <p>En SanaVida nos preocupamos de elaborar un producto bajo las condiciones sanitarias autorizadas (Res. Exenta N.º ${esc(seremi.resolution)}, ${esc(seremi.authority)}), para que puedas comprar con mayor confianza.</p>
       <aside class="seremi-badge" aria-label="Resolución sanitaria SEREMI">
         <img class="seremi-logo" src="/img/oferta/seremi-logo.png" alt="Logo SEREMI de Salud Región de Coquimbo" width="120" height="56" loading="lazy" decoding="async">
         <div class="seremi-meta">

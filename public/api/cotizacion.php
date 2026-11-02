@@ -130,7 +130,7 @@ td{padding:12px;border-bottom:1px solid #e7d8e6;vertical-align:top}
   . ($telefono !== '' ? '<p>' . $e($telefono) . '</p>' : '')
   . '<p>Tipo: ' . $e($tipoLabel) . '</p></div>
 <div class="card"><h2>Emisor</h2><p><strong>SanaVida</strong></p><p>Inversiones Vitalia SpA</p><p>RUT 78.516.946-8</p>
-<p>Daniel Riquelme 735, Ovalle</p><p>WhatsApp +' . $e($wa) . '</p></div></div>
+<p>Ovalle, Región de Coquimbo</p><p>WhatsApp +' . $e($wa) . '</p></div></div>
 <p class="intro">Gracias por tu interés en el <strong>kéfir natural SanaVida</strong>: cultivo vivo, sin pasteurizar, 100% natural. Cotización lista para confirmar con Paola.</p>
 <table><thead><tr><th>Descripción</th><th class="num">Cantidad</th><th class="num">P. unitario</th><th class="num">Total</th></tr></thead>
 <tbody><tr><td><p class="item">kéfir natural SanaVida</p><p class="sub">1 L · Sabor Natural · Botella · Búlgaros vivos</p></td>

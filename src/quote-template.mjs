@@ -187,7 +187,7 @@ export function buildQuoteHtml(input) {
         <p><strong>${esc(site.name)}</strong></p>
         <p class="muted">${esc(site.legal.company)}</p>
         <p class="muted">RUT ${esc(site.legal.rut)}</p>
-        <p class="muted">${esc(site.legal.address)}, ${esc(site.legal.city)}</p>
+        <p class="muted">${esc(site.legal.city)}, ${esc(site.legal.region)}</p>
         <p class="muted">WhatsApp +${esc(site.whatsapp)}</p>
       </div>
     </div>

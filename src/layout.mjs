@@ -17,7 +17,7 @@ const orgSchema = {
   servesCuisine: 'Lácteos fermentados',
   address: {
     '@type': 'PostalAddress',
-    streetAddress: site.legal.address,
+    // Sin calle pública hasta operar en la planta autorizada.
     addressLocality: site.legal.city,
     addressRegion: site.legal.region,
     addressCountry: site.country,
@@ -135,7 +135,7 @@ ${body}
       </ul>
     </div>
   </div>
-  <div class="wrap foot-legal"><small>© ${new Date().getFullYear()} ${site.name} · Elaborado por ${site.legal.company} (RUT ${site.legal.rut}) · ${site.legal.address}, ${site.city}, ${site.region}, Chile · Res. Exenta N.º ${site.legal.seremi.resolution} · <a href="/politicas/">Políticas</a></small></div>
+  <div class="wrap foot-legal"><small>© ${new Date().getFullYear()} ${site.name} · Elaborado por ${site.legal.company} (RUT ${site.legal.rut}) · ${site.city}, ${site.region}, Chile · Res. Exenta N.º ${site.legal.seremi.resolution} · <a href="/politicas/">Políticas</a></small></div>
 </footer>
 <a class="fab" href="${waLink()}" target="_blank" rel="noopener" aria-label="Pedir kéfir por WhatsApp">${icon('wa')}<span>Pedir kéfir</span></a>
 </body>

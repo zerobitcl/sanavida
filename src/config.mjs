@@ -27,7 +27,8 @@ export const site = {
   legal: {
     company: 'Inversiones Vitalia SpA',
     rut: '78.516.946-8',
-    address: 'Daniel Riquelme 735',
+    // Calle oculta en el sitio hasta operar físicamente en la planta autorizada.
+    address: '',
     city: 'Ovalle',
     region: 'Región de Coquimbo',
     country: 'Chile',
