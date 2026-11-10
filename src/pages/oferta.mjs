@@ -10,9 +10,9 @@ const __dir = dirname(fileURLToPath(import.meta.url));
 const styles = readFileSync(join(__dir, '../oferta-styles.css'), 'utf8').replace(/^\uFEFF/, '');
 
 const packs = {
-  1: { qty: 1, price: 7500, save: 0, label: '1 litro' },
-  2: { qty: 2, price: 12990, save: 2010, label: '2 litros' },
-  3: { qty: 3, price: 17990, save: 4510, label: '3 litros' },
+  1: { qty: 1, price: 6500, save: 0, label: '1 litro' },
+  2: { qty: 2, price: 11500, save: 1500, label: '2 litros' },
+  3: { qty: 3, price: 16500, save: 3000, label: '3 litros' },
 };
 
 const gallery = [
@@ -475,7 +475,7 @@ fbq('track','PageView');
 <div class="mobilebuy" id="stickyBuy"><a href="#pedido" style="background:#d81b60;color:#fff"><span>QUIERO PEDIR MI KÉFIR</span><span id="stickyPrice">Desde ${clp(packs[1].price)} →</span></a></div>
 
 <script>
-const offers={1:{qty:1,price:7500,save:0},2:{qty:2,price:12990,save:2010},3:{qty:3,price:17990,save:4510}};
+const offers={1:{qty:1,price:6500,save:0},2:{qty:2,price:11500,save:1500},3:{qty:3,price:16500,save:3000}};
 const deliveryFee=${site.deliveryFee};
 const waNumber=${JSON.stringify(waNumber)};
 const gallery=${JSON.stringify(gallery.map((g) => ({ src: g.src, alt: g.alt })))};

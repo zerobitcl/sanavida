@@ -4,7 +4,7 @@
 // No subir a git.
 return [
   'api2pdf_key' => 'TU-API-KEY',
-  'unit_price' => 7500,
+  'unit_price' => 6500,
   'whatsapp' => '56979848821',
   'ops_pin' => '8210',
   'db' => [

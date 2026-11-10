@@ -30,7 +30,7 @@ const formInner = `
       placeholder: 'Comuna, día de entrega, condiciones especiales…',
     })}
   </div>
-  <p class="shell-form-note">Precio de referencia: $8.000 por botella de 1 L.</p>
+  <p class="shell-form-note">Precio de referencia: $6.500 por botella de 1 L.</p>
   <div class="hero-actions">
     <button class="btn btn-cta" type="submit" id="cotizacion-submit">Generar PDF</button>
     <a class="btn btn-ghost" href="/dashboard/">Volver al panel</a>
